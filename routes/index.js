@@ -4,17 +4,15 @@
  */
 
 exports.index = function(req, res){
-    var Movies = require('../models/movies.js').Movies;
+    var Movies = require('../models/movies.js');
     var model = null;
 
-    Movies.find({}, {
-        _id:0
-    }).lean().exec(function(err, movies){
+    Movies.GetAll(function(err, movies){
         if (!err){
             res.render('index',
                 {
                     title: 'Movies Club23',
-                    movie: movies
+                    movie: JSON.stringify(movies)
                 });
         } else {
             res.render('index',

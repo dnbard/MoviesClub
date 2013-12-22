@@ -15,7 +15,7 @@ block content
 
     script(src='/javascripts/viewmodel.js')
     script.
-        var model = #{movie};
+        var model = !{movie};
         $(document).ready(function(){
             ko.applyBindings(new Viewmodel(model));
         });
