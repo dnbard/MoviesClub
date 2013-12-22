@@ -1,0 +1,109 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+div.header{
+    background: gold;
+    text-align: center;
+    overflow: hidden;
+    font-size: 45pt;
+    text-shadow: 2px 2px 2px rgb(255, 204, 0), 3px 3px 2px black;
+    color: lightyellow;
+}
+
+.row{
+    margin: 0;
+}
+
+.menu{
+    min-height: 250px;
+    background: darkgray;
+    color: wheat;
+    padding: 16px;
+    margin-top: 1px;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    text-align: center
+}
+
+.main > .movie-container:nth-child(3n-2){
+    background: gold;
+}
+
+.btn{
+    box-shadow: 0px 0px 4px black;
+}
+
+.movie-container{
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.movie{
+    height: 233px;
+    overflow: hidden;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.movie p{
+    position: absolute;
+    right: 10px;
+    bottom: 15px;
+    font-size: 15pt;
+    background: white;
+    padding: 5px;
+    border-radius: 5px;
+    padding-right: 15px;
+    text-shadow: 1px 1px 5px gray;
+    cursor: pointer;
+}
+
+.main > .movie-container:nth-child(3n-2) p{
+    background: gold;
+    color: white;
+    text-shadow: 1px 1px 5px black;
+}
+
+.add{
+    height: 233px;
+    border: 3px dashed gray;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.add > .plus{
+    background: gray;
+    font-size: 80px;
+    color: white;
+    margin: auto;
+    width: 90px;
+    margin-top: 65px;
+    text-align: center;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.add > .plus > .text{
+    position: absolute;
+    font-size: 10pt;
+    color: transparent;
+    left: 125px;
+    top: 150px;
+    transition: all 0.15s;
+}
+
+.add > .plus:hover{
+    background: white;
+    color: gray;
+    width: 280px;
+}
+
+.add > .plus:hover > .text{
+    color: gray;
+}
