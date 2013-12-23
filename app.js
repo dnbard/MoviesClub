@@ -9,6 +9,7 @@ var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 var db = require('./database.js');
+var bootstrap = require('./bootstrap.js')
 
 var app = express();
 
@@ -22,8 +23,9 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
-//app.use(require('less-middleware')({ src: path.join(__dirname, 'public') }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(bootstrap.userAuth);
 
 // development only
 if ('development' == app.get('env')) {

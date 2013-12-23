@@ -1,5 +1,4 @@
-var db = require('../database.js'),
-    mongoose = require('mongoose');
+var mongoose = require('mongoose');
 
 var moviesSchema = mongoose.Schema({
     name: String,
