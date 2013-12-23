@@ -1,5 +1,7 @@
-var mongoose = require('mongoose');
-var cString = 'mongodb://gherdysoft:56tyghbn@dharma.mongohq.com:10072/moviesdb';
+var mongoose = require('mongoose'), 
+    config = require('./config.js');
+
+var cString = config.databaseConnectionString;
 
 function connect(callback){
     var reconnTimer = null;
