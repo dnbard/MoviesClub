@@ -9,7 +9,8 @@ var user = require('./routes/user');
 var http = require('http');
 var path = require('path');
 var db = require('./database.js');
-var bootstrap = require('./bootstrap.js')
+var bootstrap = require('./bootstrap.js');
+var api = require('./routes/api.js');
 
 var app = express();
 
@@ -22,10 +23,12 @@ app.use(express.logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.cookieParser());
 
 app.use(bootstrap.userAuth);
+
+app.use(app.router);
+app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
 if ('development' == app.get('env')) {
@@ -34,6 +37,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
+app.get('/api/login', api.login);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
