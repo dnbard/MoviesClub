@@ -3,24 +3,40 @@ extends layout
 block content
     div(class='container')
         div(class='header') #{title}
+            img(src='images/logo.png')
             div(class='user-info')
-                span Привет,
-                span(class='user-name')  Саша
-                span !
-        div(class='page', data-bind='visible: page() == Global.Pages.Undefined')
-            div(class='main row', data-bind="foreach: movies")
+                div(data-bind='visible: isAuthorised')
+                    span Привет,
+                    span(class='user-name', data-bind='text: user().name')
+                    span !
+                    <br/>
+                    button(class='btn control-exit',data-bind='click: onLogoutClick') Выйти
+                div(class='auth-none row', data-bind='visible: !isAuthorised()')
+                    div(class='login-input')
+                        span Имя
+                        input(data-bind='value: loginBox')
+                        <br/>
+                        span Пароль
+                        input(data-bind='value: pswdBox')
+                    div(class='login-holder')
+                        button(class='btn btn-primary', data-bind='click: onLoginClick') Войти
+                    div(class='login-holder')
+                        button(class='btn btn-info') ?
+
+        div(class='page row', data-bind='visible: page() == Global.Pages.Main')
+            cdiv(class='main', data-bind="foreach: movies")
                 div(class='movie-container col-md-4')
                     div(class='movie', style='background: url(http://st.kp.yandex.net/images/film_iphone/iphone360_692526.jpg)')
-                        p Кинцо
+                        p(data-bind='text: name')
 
-            div(class='movie-container col-md-4')
+            div(class='movie-container col-md-4', data-bind='visible: isAuthorised')
                 div(class='add')
                     div(class='plus') +
                         div(class='text') Добавить новое кино
 
     script(src='/javascripts/viewmodel.js')
     script.
-        var model = !{movie};
+        var model = !{model};
         $(document).ready(function(){
             ko.applyBindings(new Viewmodel(model));
         });
