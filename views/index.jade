@@ -10,7 +10,7 @@ block content
                     span(class='user-name', data-bind='text: user().name')
                     span !
                     <br/>
-                    button(class='btn control-exit',data-bind='click: onLogoutClick') Выйти
+                    span(class='control-exit',data-bind='click: onLogoutClick') Выйти
                 div(class='auth-none row', data-bind='visible: !isAuthorised()')
                     div(class='login-input')
                         span Имя

@@ -54,16 +54,19 @@ div.header .user-name{
 div.header .control-exit{
     float: right;
     font-family: arial;
-    font-size: 11pt;
+    font-size: 10pt;
     cursor: pointer;
     padding-right: 2px;
     transition: 0.25s all;
-    padding: 1px 5px;
+    background: rgba(0,0,0,0.1);
+    padding: 3px 6px;
+    border-radius: 5px;
 }
 
 div.header .control-exit:hover{
     text-decoration: underline;
-    color: goldenrod;
+    color: gold;
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .auth-none{
