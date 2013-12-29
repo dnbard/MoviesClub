@@ -8,11 +8,23 @@ a {
 
 div.header{
     background: gold;
-    text-align: center;
+    text-align: left;
+    padding-left: 45px;
+    padding-bottom: 10px;
     overflow: hidden;
+    font-family: 'Marck Script', cursive;
     font-size: 45pt;
-    text-shadow: 2px 2px 2px rgb(255, 204, 0), 3px 3px 2px black;
+    text-shadow: 2px 2px 2px rgb(148, 136, 87), 3px 3px 2px black;
     color: lightyellow;
+    position: relative;
+}
+
+div.header > .user-info{
+    position: absolute;
+    right: 50px;
+    top: 15px;
+    font-size: 16pt;
+    text-shadow: 1px 1px 2px black, 1px 1px 2px black;
 }
 
 .row{

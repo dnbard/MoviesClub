@@ -3,15 +3,20 @@ extends layout
 block content
     div(class='container')
         div(class='header') #{title}
-        div(class='main row', data-bind="foreach: movies")
-            div(class='movie-container col-md-4')
-                div(class='movie', style='background: url(http://st.kp.yandex.net/images/film_iphone/iphone360_692526.jpg)')
-                    p Кинцо
+            div(class='user-info')
+                span Привет,
+                span(class='user-name')  Саша
+                span !
+        div(class='page', data-bind='visible: page() == Global.Pages.Undefined')
+            div(class='main row', data-bind="foreach: movies")
+                div(class='movie-container col-md-4')
+                    div(class='movie', style='background: url(http://st.kp.yandex.net/images/film_iphone/iphone360_692526.jpg)')
+                        p Кинцо
 
-    div(class='movie-container col-md-4')
-        div(class='add')
-            div(class='plus') +
-                div(class='text') Добавить новое кино
+            div(class='movie-container col-md-4')
+                div(class='add')
+                    div(class='plus') +
+                        div(class='text') Добавить новое кино
 
     script(src='/javascripts/viewmodel.js')
     script.
