@@ -1,3 +1,9 @@
+var s4 = function() {
+    return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+};
+
 Utils = {
     createCookie: function (name, value, days) {
         var expires;
@@ -65,5 +71,10 @@ Utils = {
                 }
             }
         })
+    },
+
+    guid: function(){
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
     }
 }
