@@ -1,5 +1,6 @@
 var Users = require('../models/users.js').Users,
-    utils = require('../utils.js');
+    utils = require('../utils.js'),
+    Movies = require('../models/movies.js').Movies;
 
 var sendNotAuth = function(req, res){
     res.send({
@@ -37,5 +38,28 @@ exports.login = function(req, res){
     } else {
         sendNotAuth(req, res);
     }
+}
+
+exports.add = function(req, res){
+    if(res.locals.auth) {
+        var url = req.body.url;
+        if (url && utils.isValidUrl(url)){
+            var parser = require('../parser/main.js');
+            parser.parse(url, function(movie){
+                var ent = new Movies();
+                ent.name = movie.title;
+                ent.image = movie.image;
+                ent.desc = movie.description;
+                ent.save();
+
+                res.send(true);
+            });
+
+        } else res.send({
+            result: false,
+            msg: 'Provided URL isn\'t valid.'
+        });
+    }
+    else res.send(false);
 }
 

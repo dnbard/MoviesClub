@@ -2,8 +2,9 @@ extends layout
 
 block content
     div(class='container')
-        div(class='header') #{title}
-            img(src='images/logo.png')
+        div(class='header')
+            span(data-bind='click: returnHomeClick') #{title}
+            img(src='images/logo.png', data-bind='click: returnHomeClick')
             div(class='user-info')
                 div(data-bind='visible: isAuthorised')
                     span Привет,
@@ -26,13 +27,28 @@ block content
         div(class='page row', data-bind='visible: page() == Global.Pages.Main')
             cdiv(class='main', data-bind="foreach: movies")
                 div(class='movie-container col-md-4')
-                    div(class='movie', style='background: url(http://st.kp.yandex.net/images/film_iphone/iphone360_692526.jpg)')
+                    div(class='movie', data-bind="style: {background: 'url('+image+')'}")
                         p(data-bind='text: name')
 
             div(class='movie-container col-md-4', data-bind='visible: isAuthorised')
                 div(class='add')
-                    div(class='plus') +
+                    div(class='plus', data-bind="click: addNewMovieClick") +
                         div(class='text') Добавить новое кино
+
+        div(class='movie-add page row', data-bind='visible: page()== Global.Pages.AddMovie')
+            div(class='title') Добавить новый фильм в коллекцию
+            div(class='holder row')
+                div(class='plus col-md-2') +
+                div(class='input-holder col-md-7')
+                    input(class="movie-name form-control", type="text", data-bind="value: addMovie.url")
+                div(class='button-holder col-md-3')
+                    button(class='btn btn-primary', data-bind="click: addMovie.btnClick") Добавить
+            div(class='error row', data-bind='visible: addMovie.errorVisible')
+                div(data-bind='text: addMovie.errorCaption')
+                div(class='button-close', data-bind='click: addMovie.closeError') x
+            div(class='info row')
+                span Для добавления фильма необходимо ввести url (ссылку на него) в поле выше. На данные момент поддерживаются только ссылки с сайта
+                b  kinopoisk.ru
 
     script(src='/javascripts/viewmodel.js')
     script.

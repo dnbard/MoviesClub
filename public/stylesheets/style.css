@@ -24,6 +24,7 @@ div.header{
 div.header > img{
     position: absolute;
     left: 0px;
+    cursor: pointer;
 }
 
 div.header > .user-info{
@@ -49,6 +50,10 @@ div.header .user-name{
     font-family: 'Marck Script', cursive;
     font-size: 18pt;
     padding-left: 7px;
+}
+
+div.header span{
+    cursor: pointer;
 }
 
 div.header .control-exit{
@@ -152,6 +157,7 @@ div.header .control-exit:hover{
     overflow: hidden;
     border-radius: 10px;
     cursor: pointer;
+    box-shadow: 0 0 20px black;
 }
 
 .movie p{
@@ -213,4 +219,85 @@ div.header .control-exit:hover{
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
     margin-bottom: 25px;
+}
+
+.movie-add > .title{
+    text-align: center;
+    margin-top: 25px;
+    font-family: 'Marck Script', cursive;
+    font-size: 22pt;
+    color: gray;
+}
+
+.movie-add > .holder{
+    min-height: 75px;
+    background: lightgoldenrodyellow;
+    margin: 0 150px;
+    border: 1px dashed rgb(195, 238, 83);
+    border-radius: 10px;
+}
+
+.movie-add > .holder > .plus {
+    height: 75px;
+    background: rgba(0, 0, 0, 0.03);
+    margin: 6px;
+    text-align: center;
+    font-size: 75px;
+    line-height: 100%;
+    border-right: 1px dashed rgb(195, 238, 83);
+    border-radius: 5px;
+}
+
+.movie-add > .holder > .input-holder{
+    padding-top: 28px;
+}
+
+.movie-add > .holder > .button-holder {
+    padding: 14px 0px;
+    width: 23%;
+}
+
+.movie-add > .holder > .button-holder > button {
+    width: 98%;
+    height: 60px;
+    font-weight: bold;
+    font-size: 20pt;
+}
+
+.movie-add > .info{
+    margin: 15px 150px;
+    border-top: 1px dashed gray;
+    padding-top: 7px;
+    color: gray;
+    text-align: justify;
+}
+
+.movie-add > .error {
+    background: lightcoral;
+    margin: 15px 150px;
+    border: 1px dashed red;
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+    position: relative;
+}
+
+.movie-add > .error > .button-close{
+    float: none;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    font-size: 12pt;
+    background: black;
+    opacity: 0.4;
+    color: white;
+    padding: 1px 7px 2px 7px;
+    border-radius: 14px;
+    text-shadow: none;
+    cursor: pointer;
+    transition: all 0.25s;
+}
+
+.movie-add > .error > .button-close:hover{
+    opacity: 0.75;
 }

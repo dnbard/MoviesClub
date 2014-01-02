@@ -1,5 +1,6 @@
 Global={
     Pages:{
-        Main: 0
+        Main: 0,
+        AddMovie: 1
     }
 };

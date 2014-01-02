@@ -73,8 +73,40 @@ Utils = {
         })
     },
 
+    post: function(url, data, callback, failureCallback){
+        $.post(url, data, function(data){
+            if (data && data.result){
+                if (callback)
+                    callback(data);
+            } else {
+                if (!data){
+                    console.log(Utils.format('Error. Can\'t POST {0}', url));
+                    if (failureCallback)
+                        failureCallback();
+                } else {
+                    console.log(Utils.format('Error. Can\'t POST {0}, {1}', url, data.msg));
+                    if (failureCallback)
+                        failureCallback(data);
+                }
+            }
+        })
+    },
+
     guid: function(){
         return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
         s4() + '-' + s4() + s4() + s4();
+    },
+
+    isValidUrl: function(url){
+        var rg = /^(http|https):\/\/(([a-zA-Z0-9$\-_.+!*'(),;:&=]|%[0-9a-fA-F]{2})+@)?(((25[0-5]|2[0-4][0-9]|[0-1][0-9][0-9]|[1-9][0-9]|[0-9])(\.(25[0-5]|2[0-4][0-9]|[0-1][0-9][0-9]|[1-9][0-9]|[0-9])){3})|localhost|([a-zA-Z0-9\-\u00C0-\u017F]+\.)+([a-zA-Z]{2,}))(:[0-9]+)?(\/(([a-zA-Z0-9$\-_.+!*'(),;:@&=]|%[0-9a-fA-F]{2})*(\/([a-zA-Z0-9$\-_.+!*'(),;:@&=]|%[0-9a-fA-F]{2})*)*)?(\?([a-zA-Z0-9$\-_.+!*'(),;:@&=\/?]|%[0-9a-fA-F]{2})*)?(\#([a-zA-Z0-9$\-_.+!*'(),;:@&=\/?]|%[0-9a-fA-F]{2})*)?)?$/;
+        if (rg.test(url)) {
+            return true;
+        } else {
+            return false;
+        }
+    },
+
+    stringContains: function(where, what){
+        return where.indexOf(what) != -1;
     }
 }
