@@ -171,13 +171,19 @@ div.header .control-exit:hover{
     position: absolute;
     right: 10px;
     bottom: 15px;
+    max-width: 340px;
+    max-height: 55px;
     font-size: 15pt;
+    text-align: right;
     background: white;
     padding: 5px;
     border-radius: 5px;
     padding-right: 15px;
     text-shadow: 1px 1px 5px gray;
+    box-shadow: 0 0 10px black;
     cursor: pointer;
+    overflow-y: hidden;        
+    opacity: 0.9;
 }
 
 .add{
