@@ -1,11 +1,7 @@
 var http = require('http'),
     cheerio = require('cheerio'),
-    utils = require('../utils.js');
-
-var parsers = {
-    'kinopoisk.ru': 'kinopoisk', //not working
-    'kinobaza.tv': 'kinobaza'
-}
+    utils = require('../utils.js'),
+    parsers = require('../config.js').parsers;
 
 function parse(url, callback){
     loadHtml(url, function($){

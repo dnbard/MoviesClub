@@ -47,8 +47,11 @@ block content
                 div(data-bind='text: addMovie.errorCaption')
                 div(class='button-close', data-bind='click: addMovie.closeError') x
             div(class='info row')
-                span Для добавления фильма необходимо ввести url (ссылку на него) в поле выше. На данные момент поддерживаются только ссылки с сайта
-                b  kinopoisk.ru
+                span Для добавления фильма необходимо ввести url (ссылку на него) в поле выше. На данные момент поддерживаются только ссылки с 
+                span(data-bind='visible: parsers.length == 1') сайта
+                span(data-bind='visible: parsers.length > 1') сайтов:
+                span(data-bind='foreach: parsers')
+                    a(data-bind='attr: {href: $index}, text: $data')                    
 
     script(src='/javascripts/viewmodel.js')
     script.

@@ -6,6 +6,7 @@ function Viewmodel(model){
     this.page = ko.observable(Global.Pages.Main);
     this.user = ko.observable(model.user[0]? model.user[0] : {});
     this.movies = ko.observableArray(model.movies? model.movies: []);
+    this.parsers = model.parsers;
 
     this.isAuthorised = ko.computed(function(){
         var user = this.user();
