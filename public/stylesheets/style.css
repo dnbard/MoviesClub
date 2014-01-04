@@ -314,3 +314,8 @@ div.header .control-exit:hover{
 .movie-add > .error > .button-close:hover{
     opacity: 0.75;
 }
+
+.parser {
+    margin: 0 5px;
+    font-weight: bold;
+}

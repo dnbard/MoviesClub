@@ -7,8 +7,8 @@ function parse(url, callback){
     loadHtml(url, function($){
         for(var key in parsers){
             var e = parsers[key];
-            if (utils.stringContains(url, key)){
-                var parserPath = utils.format('./{0}.js', e)
+            if (utils.stringContains(url, e.site)){
+                var parserPath = utils.format('./{0}.js', e.parser)
                 var parser = require(parserPath);
                 parser.parse($, callback);
             }

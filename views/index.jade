@@ -51,7 +51,7 @@ block content
                 span(data-bind='visible: parsers.length == 1') сайта
                 span(data-bind='visible: parsers.length > 1') сайтов:
                 span(data-bind='foreach: parsers')
-                    a(data-bind='attr: {href: $index}, text: $data')                    
+                    a(class='parser', target='_blank' data-bind='attr: {href: "http://"+site}, text: site')
 
     script(src='/javascripts/viewmodel.js')
     script.

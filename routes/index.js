@@ -23,7 +23,9 @@ exports.index = function(req, res){
 
         if (!err){
             data.model.movies = movies;                                         
-        }                
+        }
+
+        data.model = JSON.stringify(data.model);
         res.render('index', data);        
     });
 };
