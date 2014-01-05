@@ -7,10 +7,6 @@ var parsers = [
     {
         site:'kinobaza.tv',
         parser: 'kinobaza'
-    },
-    {
-        site:'kinopoisk.ru',
-        parser: 'kinobaza'
     }
 ]
 
