@@ -1,14 +1,22 @@
 var Users = require('./models/users.js');
 
+
+
 var userAuth = function(req, res, next){
-	var userToken = req.cookies.uid;
-	Users.FindByToken(userToken, function(user){
-        res.locals.user = user;
-        res.locals.auth = true;
-        next();
-    }, function(){
+    var authFailure = function(){
         res.locals.auth = false;
         next();
+    };
+
+	var userToken = req.cookies.uid;
+	Users.FindByToken(userToken, function(user){
+        if (user.length > 0){
+            res.locals.user = user[0];
+            res.locals.auth = true;
+            next();
+        } else authFailure();
+    }, function(){
+        authFailure()
     });
 }
 
