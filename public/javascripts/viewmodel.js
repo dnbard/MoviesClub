@@ -45,8 +45,6 @@ function Viewmodel(model){
     this.returnHomeClick = function(){
         this.page(Global.Pages.Main);
     };
-
-
 }
 
 function AddMovieController(model, serviceUrl){
@@ -72,8 +70,11 @@ function AddMovieController(model, serviceUrl){
         } else {
             Utils.post(serviceUrl + '/api/add', {
                 url: url
-            }, function(){
-                debugger;
+            }, function(data){
+                Utils.get(serviceUrl + '/api/get', {}, function(data){
+                    model.movies(data.movies? data.movies: []);
+                    model.page(Global.Pages.Main);
+                });
             })
         }
     }, this);
