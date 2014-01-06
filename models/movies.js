@@ -18,6 +18,7 @@ var getAll = function(callback){
             array.push({
                 name: movie.name,
                 date: movie.date,
+                desc: movie.desc,
                 image: movie.image,
                 id: movie._id
             })
