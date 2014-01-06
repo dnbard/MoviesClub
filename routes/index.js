@@ -1,7 +1,4 @@
-
-/*
- * GET home page.
- */
+var parsers = require('../config.js').parsers;
 
 exports.index = function(req, res){
     var Movies = require('../models/movies.js');
@@ -9,10 +6,11 @@ exports.index = function(req, res){
     var title = 'Кино клуб';
     var user = {};
     if (res.locals.auth) var user = res.locals.user;
-    
-    var parsers = require('../config.js').parsers;
 
-    Movies.GetAll(function(err, movies){
+    if (res.locals.auth) Movies.GetByUser(res.locals.user.id, callback);
+    else Movies.GetAll(callback);
+
+    function callback(err, movies){
         var data = {
             title: title, 
             model: {
@@ -27,5 +25,5 @@ exports.index = function(req, res){
 
         data.model = JSON.stringify(data.model);
         res.render('index', data);        
-    });
+    }
 };

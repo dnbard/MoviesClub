@@ -57,7 +57,7 @@ exports.add = function(req, res){
 
 exports.get = function(req, res){
     if (res.locals.auth){
-        Movies.GetAll(function(err, movies){
+        Movies.GetByUser(res.locals.user.id, function(err, movies){
             res.send({
                 result: true,
                 movies: movies

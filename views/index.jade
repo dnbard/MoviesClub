@@ -26,9 +26,12 @@ block content
 
         div(class='page row', data-bind='visible: page() == Global.Pages.Main')
             cdiv(class='main', data-bind="foreach: movies")
-                div(class='movie-container col-md-4')
+                div(class='movie-container col-md-4', data-bind='click: $parent.onMovieClick')
                     div(class='movie', data-bind="style: {background: 'url('+image+')'}")
-                        p(data-bind='text: name')
+                        p(class='name', data-bind='text: name')
+                        p(class='owner')
+                            img(src='images/user.png')
+                            span(data-bind='text: owner')
 
             div(class='movie-container col-md-4', data-bind='visible: isAuthorised')
                 div(class='add')
@@ -52,6 +55,24 @@ block content
                 span(data-bind='visible: parsers.length > 1') сайтов:
                 span(data-bind='foreach: parsers')
                     a(class='parser', target='_blank' data-bind='attr: {href: "http://"+site}, text: site')
+
+        div(class='details page row', data-bind='visible: page() == Global.Pages.Details')
+            div(class='col-md-12')
+                img(class='details-image', data-bind='attr:{src: movieDetails().image}')
+                div(class='details-info')
+                    div(class='title')
+                        div(class='title-text', data-bind='text: movieDetails().name')
+                        div(class='title-effect', data-bind='text: movieDetails().name')
+                div(class='details-info low' data-bind='visible: movieDetails().desc')
+                    div(class='desc', data-bind='text: movieDetails().desc')
+                div(class='details-info low' data-bind='visible: !movieDetails().desc')
+                    div(class='desc') Описание отсутствует
+                div(class='details-info low')
+                    div(class='desc')
+                        span Этот фильм добавил пользователь:
+                        img(src='images/user.png')
+                        b
+                            span(data-bind='text: movieDetails().owner')
 
     script(src='/javascripts/viewmodel.js')
     script.

@@ -4,9 +4,11 @@ function Viewmodel(model){
     this.addMovie = new AddMovieController(this, serviceUrl);
 
     this.page = ko.observable(Global.Pages.Main);
-    this.user = ko.observable(model.user[0]? model.user[0] : {});
+    this.user = ko.observable(model.user? model.user : {});
     this.movies = ko.observableArray(model.movies? model.movies: []);
     this.parsers = model.parsers;
+
+    this.movieDetails = ko.observable({});
 
     this.isAuthorised = ko.computed(function(){
         var user = this.user();
@@ -19,6 +21,7 @@ function Viewmodel(model){
     this.onLogoutClick = function(){
         this.user({});
         Utils.eraseCookie('uid');
+        window.location.reload(true);
     };
 
     this.onLoginClick = function(){
@@ -30,13 +33,23 @@ function Viewmodel(model){
             p: password
         },
             $.proxy(function (data){
-                this.user(data.user);
+                Utils.get(serviceUrl + '/api/get', {},
+                $.proxy(function(model){
+                    this.movies(model.movies? model.movies: []);
+                    this.page(Global.Pages.Main);
+                    this.user(data.user);
+                }, this));
             }, this)
         );
 
         this.loginBox('');
         this.pswdBox('');
     };
+
+    this.onMovieClick = $.proxy(function(obj, event){
+        this.movieDetails(obj);
+        this.page(Global.Pages.Details);
+    }, this);
 
     this.addNewMovieClick = function(){
         this.addMovie.show();

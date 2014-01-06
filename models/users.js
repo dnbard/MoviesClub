@@ -46,6 +46,16 @@ var find = function(name, pass, success, failure){
 	}
 };
 
+var getAll = function(success, failure){
+    Users.find({}, function(err, users){
+        if (err) failure(err);
+        else {
+            success(users);
+        }
+    });
+}
+
 exports.Users = Users;
 exports.Find = find;
 exports.FindByToken = findByToken;
+exports.GetAll = getAll;
