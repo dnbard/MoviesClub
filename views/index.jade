@@ -73,6 +73,26 @@ block content
                         img(src='images/user.png')
                         b
                             span(data-bind='text: movieDetails().owner')
+            div(class='col-md-12')
+                div(class='btn-group')
+                    button(type='button', class='btn btn-default btn-first dropdown-toggle', data-bind='click: onExuaWatch')
+                        img(class='exua', src='images/ex.png')
+                        span Cмотреть на EX.UA
+                    button(type='button', class='btn btn-default dropdown-toggle', data-toggle='dropdown')
+                        span(class='caret')
+                    ul(class='dropdown-menu', role='menu')
+                        li
+                            a(href='#', data-bind='click: onVkWatch')
+                                img(class='icon', src='images/vk.png')
+                                span Смотреть ВКонтакте
+                        li
+                            a(href='#', data-bind='click: onKinopoiskSearch')
+                                img(class='icon', src='images/kinopoisk.png')
+                                span Искать на Кинопоиске
+                        li
+                            a(href='#', data-bind='click: onRutrackerSearch')
+                                img(class='icon', src='images/rutracker.png')
+                                span Искать на RuTracker
 
     script(src='/javascripts/viewmodel.js')
     script.

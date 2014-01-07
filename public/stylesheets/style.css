@@ -156,6 +156,16 @@ div.header .control-exit:hover{
     box-shadow: 0px 0px 4px black;
 }
 
+.btn-group .btn{
+    box-shadow: none;
+}
+
+img.exua{
+    width: 28px;
+    margin-right: 8px;
+    margin-top: -2px;
+}
+
 .movie-container{
     padding-top: 15px;
     padding-bottom: 15px;
@@ -292,6 +302,22 @@ div.header .control-exit:hover{
     margin: auto;
     width: 100%;
     color: transparent;
+}
+
+.details .btn-group{
+    margin: 15px 17px;
+}
+
+.details .btn-group .btn-first{
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.details .icon{
+    margin-left: -10px;
+    margin-right: 5px;
+    height: 16px;
+    margin-top: -3px;
 }
 
 .add{

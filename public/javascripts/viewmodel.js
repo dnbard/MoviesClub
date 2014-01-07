@@ -58,6 +58,31 @@ function Viewmodel(model){
     this.returnHomeClick = function(){
         this.page(Global.Pages.Main);
     };
+
+    var openNewWindow = $.proxy(function(pathPattern){
+        var movie = this.movieDetails();
+        var name = movie.name;
+        if (name){
+            var path = Utils.format(pathPattern, name);
+            window.open(path, '_blank');
+        }
+    }, this);
+
+    this.onExuaWatch = function(){
+        openNewWindow("http://ex.ua/search?s={0}");
+    };
+
+    this.onVkWatch = function(){
+        openNewWindow("http://vk.com/video?q={0}&section=search");
+    };
+
+    this.onKinopoiskSearch = function(){
+        openNewWindow("http://www.kinopoisk.ru/index.php?first=no&what=&kp_query={0}");
+    };
+
+    this.onRutrackerSearch = function(){
+        openNewWindow("http://rutracker.org/forum/tracker.php?nm={0}");
+    };
 }
 
 function AddMovieController(model, serviceUrl){
