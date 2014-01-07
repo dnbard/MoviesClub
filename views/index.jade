@@ -74,7 +74,7 @@ block content
                         b
                             span(data-bind='text: movieDetails().owner')
             div(class='col-md-12')
-                div(class='btn-group')
+                div(class='btn-group', data-bind='visible: isAuthorised')
                     button(type='button', class='btn btn-default btn-first dropdown-toggle', data-bind='click: onExuaWatch')
                         img(class='exua', src='images/ex.png')
                         span Cмотреть на EX.UA
@@ -93,6 +93,11 @@ block content
                             a(href='#', data-bind='click: onRutrackerSearch')
                                 img(class='icon', src='images/rutracker.png')
                                 span Искать на RuTracker
+                div(class='register-box alert alert-info', data-bind='visible: !isAuthorised()')
+                    span(class='caption-register') Зарегистрируйтесь
+                    span или
+                    span(class='caption-login') войдите
+                    span , чтобы получить доступ ко всем возможностям сайта!
 
     script(src='/javascripts/viewmodel.js')
     script.
