@@ -24,9 +24,12 @@ function Viewmodel(model){
         window.location.reload(true);
     };
 
+    this.error = ko.observable({});
+
     this.onLoginClick = function(){
         var login = this.loginBox();
         var password = this.pswdBox();
+        this.error({});
 
         Utils.get(serviceUrl + '/api/login', {
             n: login,
@@ -39,11 +42,31 @@ function Viewmodel(model){
                     this.page(Global.Pages.Main);
                     this.user(data.user);
                 }, this));
+            }, this),
+            $.proxy(function(data){
+                if (data && data.msg == "User is not authorised")
+                    this.error({
+                        type: 'login',
+                        msg: 'Пользователь не найден или пароль не верен. Проверьте правильность вводимых данных.'
+                    });
+                else
+                    this.error({
+                        type: 'login',
+                        msg: 'Не удалось войти в систему'
+                    });
+                debugger;
             }, this)
         );
 
         this.loginBox('');
         this.pswdBox('');
+    };
+
+    this.onLoginCancel = function(){
+        this.loginBox('');
+        this.pswdBox('');
+
+        this.page(Global.Pages.Main);
     };
 
     this.onMovieClick = $.proxy(function(obj, event){
@@ -82,6 +105,16 @@ function Viewmodel(model){
 
     this.onRutrackerSearch = function(){
         openNewWindow("http://rutracker.org/forum/tracker.php?nm={0}");
+    };
+
+    this.showLoginPage = function(){
+        this.error({});
+        this.loginBox('');
+        this.pswdBox('');
+
+        if (!this.isAuthorised()){
+            this.page(Global.Pages.Login);
+        }
     };
 }
 

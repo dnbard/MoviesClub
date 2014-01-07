@@ -466,3 +466,62 @@ img.exua{
 .details .caption-login:hover, .details .caption-register:hover{
     text-decoration: underline;
 }
+
+.login{
+    min-height: 0px;
+    padding-bottom: 50px;
+    padding-top: 25px;
+}
+
+.login > .title{
+    margin-top: 25px;
+    text-align: center;
+    font-size: 15pt;
+    color: gray;
+}
+
+.login > .title > .caption{
+    font-family: 'Marck Script', cursive;
+    font-size: 28pt;
+    margin-bottom: 15px;
+}
+
+.login .caption > img{
+    opacity: 0.5;
+}
+
+.login > .title input{
+    font-size: 20pt;
+    margin-bottom: 15px;
+}
+
+.login .buttons{
+    margin-top: 20px;
+}
+
+.login .btn{
+    margin: 5px 15px;
+    font-weight: bold;
+    box-shadow: none;
+    font-size: 16pt;
+    padding: 10px 25px;
+}
+
+.login .sitename{
+    font-size: 32pt;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+.login .caption-register{
+    font-weight: bold;
+    margin-right: 5px;
+    cursor: pointer;
+    font-size: 13pt;
+    color: rgb(0, 173, 255);
+    margin-top: 5px;
+}
+
+.login .caption-register:hover{
+    text-decoration: underline;
+}

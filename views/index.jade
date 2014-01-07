@@ -5,7 +5,7 @@ block content
         div(class='header')
             span(data-bind='click: returnHomeClick') #{title}
             img(src='images/logo.png', data-bind='click: returnHomeClick')
-            div(class='user-info')
+            div(class='user-info', data-bind='visible: page() != Global.Pages.Login')
                 div(data-bind='visible: isAuthorised')
                     span Привет,
                     span(class='user-name', data-bind='text: user().name')
@@ -18,7 +18,7 @@ block content
                         input(data-bind='value: loginBox')
                         <br/>
                         span Пароль
-                        input(data-bind='value: pswdBox')
+                        input(type='password', data-bind='value: pswdBox')
                     div(class='login-holder')
                         button(class='btn btn-primary', data-bind='click: onLoginClick') Войти
                     div(class='login-holder')
@@ -96,8 +96,27 @@ block content
                 div(class='register-box alert alert-info', data-bind='visible: !isAuthorised()')
                     span(class='caption-register') Зарегистрируйтесь
                     span или
-                    span(class='caption-login') войдите
+                    span(class='caption-login', data-bind='click: showLoginPage') войдите
                     span , чтобы получить доступ ко всем возможностям сайта!
+
+        div(class='login page row', data-bind='visible: page() == Global.Pages.Login')
+            div(class='col-md-6 col-md-offset-3 title')
+                div(class='caption')
+                    img(src='images/logo.png')
+                    span Войти в
+                    span(class='sitename') Киноклуб
+                div
+                    div Имя
+                    input(data-bind='value: loginBox')
+                    div Пароль
+                    input(type='password', data-bind='value: pswdBox')
+                    div(class='alert alert-danger',
+                        data-bind='visible: error() && error().type=="login", text: error().msg')
+                    div(class='row buttons')
+                        button(class='btn btn-primary', data-bind='click: onLoginClick') Войти
+                        button(class='btn btn-default') Регистрация
+                        button(class='btn btn-default', data-bind='click: onLoginCancel') Отмена
+
 
     script(src='/javascripts/viewmodel.js')
     script.
