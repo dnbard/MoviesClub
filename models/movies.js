@@ -6,7 +6,12 @@ var moviesSchema = mongoose.Schema({
     image: String,
     desc: String,
     date: String,
-    owner: String
+    owner: String,
+    ratings:[{
+        provider: String,
+        rating: String
+    }],
+    genres: [String]
 });
 
 var Movies = mongoose.model('Movies', moviesSchema);
@@ -34,7 +39,9 @@ function FormatMoviesList(movies, callback){
                 desc: movie.desc,
                 image: movie.image,
                 owner: owner,
-                id: movie._id
+                id: movie._id,
+                ratings: movie.ratings,
+                genres: movie.genres
             });
         }
 
@@ -68,6 +75,8 @@ var addMovie = function(movie, user, callback){
     ent.image = movie.image;
     ent.desc = movie.description;
     ent.owner = user.id;
+    ent.ratings = movie.ratings;
+    ent.genres = movie.genres;
     ent.save(callback);
 }
 

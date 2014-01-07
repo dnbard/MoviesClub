@@ -65,8 +65,19 @@ block content
                         div(class='title-effect', data-bind='text: movieDetails().name')
                 div(class='details-info low' data-bind='visible: movieDetails().desc')
                     div(class='desc', data-bind='text: movieDetails().desc')
-                div(class='details-info low' data-bind='visible: !movieDetails().desc')
-                    div(class='desc') Описание отсутствует
+                div(class='details-info low')
+                    div(class='desc', data-bind='visible: movieDetails().genres && movieDetails().genres.length > 0')
+                        span(data-bind='visible: movieDetails().genres && movieDetails().genres.length == 1') Жанр:
+                        span(data-bind='visible: movieDetails().genres && movieDetails().genres.length > 1') Жанры:
+                        span(class='genres', data-bind='text: formatGenres()')
+                div(class='details-info low')
+                    div(class='desc', data-bind='visible: movieDetails().ratings && movieDetails().ratings.length > 0')
+                        span Рейтинг:
+                        cdiv(data-bind='foreach: movieDetails().ratings')
+                            div(class='rating')
+                                img(class='rating-provider', data-bind='attr:{src: "images/p_" + provider + ".png"}')
+                                span(class='rating-value', data-bind='text: rating')
+
                 div(class='details-info low')
                     div(class='desc')
                         span Этот фильм добавил пользователь:

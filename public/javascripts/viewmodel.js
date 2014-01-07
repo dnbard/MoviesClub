@@ -116,6 +116,16 @@ function Viewmodel(model){
             this.page(Global.Pages.Login);
         }
     };
+
+    this.formatGenres = function(){
+        var movie = this.movieDetails();
+        if (movie.genres){
+            if (movie.genres.length == 1)
+                return movie.genres[0];
+            else if (movie.genres.length > 1) return movie.genres.join(', ');
+        }
+        return '';
+    }
 }
 
 function AddMovieController(model, serviceUrl){

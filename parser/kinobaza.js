@@ -1,13 +1,47 @@
-var internal = require('./parser.js');
+var internal = require('./parser.js'),
+    utils = require('../utils.js');
 
 function parse($, callback){
     var movie = {
         title: parseName($),
         description: parseDesc($),
-        image: parseImage($)
+        image: parseImage($),
+        ratings: parseRatings($),
+        genres: parseGenres($)
     }
 
     callback(movie);
+}
+
+function parseGenres($){
+    var selector = '.filter_genres_set_link';
+    var doms = $(selector);
+
+    var result = [];
+    doms.each(function(){
+        var self= $(this);
+        result.push(self.text());
+    });
+
+    return result;
+}
+
+function parseRatings($){
+    var selector = '.rating-link';
+    var doms = $(selector);
+
+    var result = [];
+    doms.each(function(){
+        var self = $(this);
+        var ratingProvider = internal.getRatingProvider(self.attr('href'));
+        if (ratingProvider)
+            result.push({
+                rating: utils.trim(self.find('strong').text()),
+                provider: ratingProvider
+            });
+    });
+
+    return result;
 }
 
 function parseName($){

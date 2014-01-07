@@ -33,8 +33,14 @@ function format(format) {
     return format.replace(sprintfRegex, sprintf);
 }
 
+function trim(str)
+{
+    return str.replace(/^\s+|\s+$/g, '');
+};
+
 
 exports.guid = guid;
 exports.isValidUrl = isValidUrl;
 exports.stringContains = stringContains;
 exports.format = format;
+exports.trim = trim;

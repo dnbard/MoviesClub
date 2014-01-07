@@ -20,5 +20,16 @@ function parseImage($, selector){
     return dom.attr('src');
 }
 
+function getRatingProvider(href){
+    var providers = ['imdb', 'kinopoisk', 'films.imhonet'];
+
+    for(var i = 0; i < providers.length; i ++){
+        var provider = providers[i];
+        if (utils.stringContains(href, provider)) return provider;
+    }
+    return null;
+}
+
 exports.parse = parse;
 exports.parseImage = parseImage;
+exports.getRatingProvider = getRatingProvider;
