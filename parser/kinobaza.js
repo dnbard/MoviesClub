@@ -15,13 +15,23 @@ function parse($, callback){
 }
 
 function parseGenres($){
+    var stopGenres = [
+        'слова'
+    ];
+
     var selector = '.filter_genres_set_link';
     var doms = $(selector);
 
     var result = [];
     doms.each(function(){
         var self= $(this);
-        result.push(self.text());
+        var genre = self.text();
+
+        var add = true;
+        for(var i = 0; i < stopGenres.length; i++)
+            if (utils.stringContains(genre, stopGenres[i])) add = false;
+
+        if (add) result.push(genre);
     });
 
     console.log('genres');
