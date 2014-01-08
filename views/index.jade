@@ -57,8 +57,29 @@ block content
                     a(class='parser', target='_blank' data-bind='attr: {href: "http://"+site}, text: site')
 
         div(class='details page row', data-bind='visible: page() == Global.Pages.Details')
-            div(class='col-md-12')
-                img(class='details-image', data-bind='attr:{src: movieDetails().image}')
+            div(class='col-md-3')
+                img(class='details-image row', data-bind='attr:{src: movieDetails().image}')
+                div(class='btn-group', data-bind='visible: isAuthorised')
+                    button(type='button', class='btn btn-default btn-first dropdown-toggle', data-bind='click: onExuaWatch')
+                        img(class='exua', src='images/ex.png')
+                        span Cмотреть на EX.UA
+                    button(type='button', class='btn btn-default dropdown-toggle', data-toggle='dropdown')
+                        span(class='caret')
+                    ul(class='dropdown-menu', role='menu')
+                        li
+                            a(href='#', data-bind='click: onVkWatch')
+                                img(class='icon', src='images/vk.png')
+                                span Смотреть ВКонтакте
+                        li
+                            a(href='#', data-bind='click: onKinopoiskSearch')
+                                img(class='icon', src='images/kinopoisk.png')
+                                span Искать на Кинопоиске
+                        li
+                            a(href='#', data-bind='click: onRutrackerSearch')
+                                img(class='icon', src='images/rutracker.png')
+                                span Искать на RuTracker
+
+            div(class='col-md-9')
                 div(class='details-info')
                     div(class='title')
                         div(class='title-text', data-bind='text: movieDetails().name')
@@ -84,26 +105,8 @@ block content
                         img(src='images/user.png')
                         b
                             span(data-bind='text: movieDetails().owner')
+
             div(class='col-md-12')
-                div(class='btn-group', data-bind='visible: isAuthorised')
-                    button(type='button', class='btn btn-default btn-first dropdown-toggle', data-bind='click: onExuaWatch')
-                        img(class='exua', src='images/ex.png')
-                        span Cмотреть на EX.UA
-                    button(type='button', class='btn btn-default dropdown-toggle', data-toggle='dropdown')
-                        span(class='caret')
-                    ul(class='dropdown-menu', role='menu')
-                        li
-                            a(href='#', data-bind='click: onVkWatch')
-                                img(class='icon', src='images/vk.png')
-                                span Смотреть ВКонтакте
-                        li
-                            a(href='#', data-bind='click: onKinopoiskSearch')
-                                img(class='icon', src='images/kinopoisk.png')
-                                span Искать на Кинопоиске
-                        li
-                            a(href='#', data-bind='click: onRutrackerSearch')
-                                img(class='icon', src='images/rutracker.png')
-                                span Искать на RuTracker
                 div(class='register-box alert alert-info', data-bind='visible: !isAuthorised()')
                     span(class='caption-register') Зарегистрируйтесь
                     span или
