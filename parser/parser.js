@@ -17,7 +17,9 @@ function parse($, selectors){
 
 function parseImage($, selector){
     var dom = $(selector);
-    return dom.attr('src');
+    if (dom.length > 0)
+        return dom.attr('src');
+    return null;
 }
 
 function getRatingProvider(href){

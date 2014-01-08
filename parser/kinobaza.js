@@ -10,6 +10,7 @@ function parse($, callback){
         genres: parseGenres($)
     }
 
+    console.log('done');
     callback(movie);
 }
 
@@ -23,6 +24,7 @@ function parseGenres($){
         result.push(self.text());
     });
 
+    console.log('genres');
     return result;
 }
 
@@ -41,6 +43,7 @@ function parseRatings($){
             });
     });
 
+    console.log('ratings');
     return result;
 }
 
@@ -56,6 +59,7 @@ function parseName($){
     title = title.replace('«', '');
     title = title.replace('»', '');
 
+    console.log('name');
     return title;
 }
 
@@ -67,13 +71,29 @@ function parseDesc($){
     dom.each(function(v, obj){
         desc += $(this).text();
     });
+
+    console.log('desc');
     return desc;
 }
 
 function parseImage($){
-    var selector = '.cover-container img';
-    var image = internal.parseImage($, selector);
-    return image;
+    var selectors = [
+        '.cover-container img',
+        'img.cover'
+    ];
+    
+    for(var i = 0; i < selectors.length; i ++){
+        var selector = selectors[i];
+
+        var image = internal.parseImage($, selector);
+        if (image != null)
+        {
+            console.log('image');
+            return image;
+        }
+    }
+    console.log('image null');
+    return null;    
 }
 
 exports.parse = parse;

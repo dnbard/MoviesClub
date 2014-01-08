@@ -39,14 +39,21 @@ exports.add = function(req, res){
                     if (err) res.send({
                         result: false, 
                         msg: err
-                    });
-                    res.send({
-                        result: true, 
-                        msg: utils.format('Movie "{0}" added successfully')
                     }); 
+                    else {
+                        res.send({
+                            result: true, 
+                            msg: utils.format('Movie "{0}" added successfully')
+                        }); 
+                    }
                 });                
+            }, 
+            function(){
+                res.send({
+                    result: false,
+                    msg: 'Provided URL isn\'t valid.'
+                });
             });
-
         } else res.send({
             result: false,
             msg: 'Provided URL isn\'t valid.'
