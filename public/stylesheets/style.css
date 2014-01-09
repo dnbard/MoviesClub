@@ -325,6 +325,17 @@ img.exua{
     margin-top: -3px;
 }
 
+.details .glyphicon{
+    margin-left: -10px;
+    margin-right: 8px;
+    height: 16px;
+    margin-top: -3px;
+}
+
+.details .glyphicon-remove{
+    color: red;
+}
+
 .add{
     height: 233px;
     border: 3px dashed gray;

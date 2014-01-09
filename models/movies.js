@@ -80,7 +80,16 @@ var addMovie = function(movie, user, callback){
     ent.save(callback);
 }
 
+var deleteMovie = function(id, userid, success, failure){
+    Movies.findOne({owner: userid, _id: id}, function(err, movie){
+        if (err || !movie) failure(err);
+        else movie.remove(success);
+    });
+}
+
 exports.Movies = Movies;
 exports.GetAll = getAll;
 exports.GetByUser = getByUser;
+
 exports.Add = addMovie;
+exports.Delete = deleteMovie;

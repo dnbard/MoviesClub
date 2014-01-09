@@ -26,6 +26,16 @@ function Viewmodel(model){
 
     this.error = ko.observable({});
 
+    this.GetMoviesInfo = $.proxy(function (data){
+        Utils.get(serviceUrl + '/api/get', {},
+            $.proxy(function(model){
+                this.movies(model.movies? model.movies: []);
+                this.page(Global.Pages.Main);
+                if (data && data.user)
+                    this.user(data.user);
+            }, this));
+    }, this);
+
     this.onLoginClick = function(){
         var login = this.loginBox();
         var password = this.pswdBox();
@@ -35,14 +45,7 @@ function Viewmodel(model){
             n: login,
             p: password
         },
-            $.proxy(function (data){
-                Utils.get(serviceUrl + '/api/get', {},
-                $.proxy(function(model){
-                    this.movies(model.movies? model.movies: []);
-                    this.page(Global.Pages.Main);
-                    this.user(data.user);
-                }, this));
-            }, this),
+            this.GetMoviesInfo,
             $.proxy(function(data){
                 if (data && data.msg == "User is not authorised")
                     this.error({
@@ -54,7 +57,7 @@ function Viewmodel(model){
                         type: 'login',
                         msg: 'Не удалось войти в систему'
                     });
-                debugger;
+                if (this.page() != Global.Pages.Login) Utils.alert(this.error().msg);
             }, this)
         );
 
@@ -126,6 +129,13 @@ function Viewmodel(model){
         }
         return '';
     }
+
+    this.onDeleteMovie = function(){
+        var movie = this.movieDetails();
+        Utils.post(serviceUrl + '/api/delete', {
+            movie: movie.id
+        }, this.GetMoviesInfo);
+    }
 }
 
 function AddMovieController(model, serviceUrl){
@@ -160,8 +170,9 @@ function AddMovieController(model, serviceUrl){
             this.isWaiting(true);
             Utils.post(serviceUrl + '/api/add', {
                 url: url
-            }, function(data){
-                Utils.get(serviceUrl + '/api/get', {}, onGetCallback);
+            }, model.GetMoviesInfo,
+            function(){
+                Utils.alert('Can\'t delete this movie. Something went wrong. Please report this issue.')
             });
         }
     }, this);

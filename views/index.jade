@@ -83,6 +83,11 @@ block content
                             a(href='#', data-bind='click: onRutrackerSearch')
                                 img(class='icon', src='images/rutracker.png')
                                 span Искать на RuTracker
+                        li(class='divider')
+                        li(data-bind='visible: user && movieDetails && user.id == movieDetails.owner')
+                            a(href='#', data-bind='click: onDeleteMovie')
+                                span(class='glyphicon glyphicon-remove')
+                                span Удалить фильм
 
             div(class='col-md-9')
                 div(class='details-info')

@@ -71,5 +71,17 @@ exports.get = function(req, res){
             });
         })
     } 
-    else sendNotAuth(req, res);    
+    else sendNotAuth(req, res);
+}
+
+exports.delete = function(req, res){
+    if (res.locals.auth){
+        var movieid = req.body.movie;
+        Movies.Delete(movieid, res.locals.user.id,
+        function(){
+            res.send({result: true})
+        }, function(){
+                res.send(false);
+            });
+    } else sendNotAuth(req, res);
 }

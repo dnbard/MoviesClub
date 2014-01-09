@@ -106,6 +106,10 @@ Utils = {
         }
     },
 
+    alert: function(msg){
+        alert(msg);
+    },
+
     stringContains: function(where, what){
         return where.indexOf(what) != -1;
     }
