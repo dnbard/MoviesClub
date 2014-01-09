@@ -23,17 +23,20 @@ block content
                         button(class='btn btn-primary', data-bind='click: onLoginClick') Войти
                     div(class='login-holder')
                         button(class='btn btn-info') ?
+            div(class='separator-black')
+            div(class='separator')
+        div(class='control')
 
-        div(class='page row', data-bind='visible: page() == Global.Pages.Main')
+        div(class='first page row', data-bind='visible: page() == Global.Pages.Main')
             cdiv(class='main', data-bind="foreach: movies")
-                div(class='movie-container col-md-4', data-bind='click: $parent.onMovieClick')
-                    div(class='movie', data-bind="style: {background: 'url('+image+')'}")
-                        p(class='name', data-bind='text: name')
-                        p(class='owner')
-                            img(src='images/user.png')
-                            span(data-bind='text: owner')
+                //div(class='movie-container col-md-4')
+                div(class='movie', data-bind='style: {background: "url("+image+")"}, click: $parent.onMovieClick')
+                    p(class='name', data-bind='text: name')
+                    p(class='owner')
+                        img(src='images/user.png')
+                        span(data-bind='text: owner')
 
-            div(class='movie-container col-md-4', data-bind='visible: isAuthorised')
+            div(class='movie-container', data-bind='visible: isAuthorised')
                 div(class='add')
                     div(class='plus', data-bind="click: addNewMovieClick") +
                         div(class='text') Добавить новое кино
