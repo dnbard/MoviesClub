@@ -135,8 +135,16 @@ function AddMovieController(model, serviceUrl){
     this.show = function(){
         this.url('');
         this.errorCaption('');
+        this.isWaiting(false);
         model.page(Global.Pages.AddMovie);
     }
+
+    var onGetCallback = $.proxy(function(data){
+        model.movies(data.movies? data.movies: []);
+        this.isWaiting(false);
+
+        model.page(Global.Pages.Main);
+    },this);
 
     this.btnClick = $.proxy(function(){
         this.errorCaption('');
@@ -149,14 +157,12 @@ function AddMovieController(model, serviceUrl){
             this.errorCaption('Введеный url не верен.');
             return;
         } else {
+            this.isWaiting(true);
             Utils.post(serviceUrl + '/api/add', {
                 url: url
             }, function(data){
-                Utils.get(serviceUrl + '/api/get', {}, function(data){
-                    model.movies(data.movies? data.movies: []);
-                    model.page(Global.Pages.Main);
-                });
-            })
+                Utils.get(serviceUrl + '/api/get', {}, onGetCallback);
+            });
         }
     }, this);
 
@@ -167,4 +173,6 @@ function AddMovieController(model, serviceUrl){
     this.errorVisible = ko.computed(function(){
         return this.errorCaption && this.errorCaption().length > 0;
     }, this);
+
+    this.isWaiting = ko.observable(false);
 }

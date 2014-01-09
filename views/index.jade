@@ -43,12 +43,17 @@ block content
             div(class='holder row')
                 div(class='plus col-md-2') +
                 div(class='input-holder col-md-7')
-                    input(class="movie-name form-control", type="text", data-bind="value: addMovie.url")
+                    input(class="movie-name form-control", type="text",
+                        data-bind="value: addMovie.url, attr:{disabled: addMovie.isWaiting}")
                 div(class='button-holder col-md-3')
-                    button(class='btn btn-primary', data-bind="click: addMovie.btnClick") Добавить
+                    button(class='btn btn-primary',
+                        data-bind="click: addMovie.btnClick, attr:{disabled: addMovie.isWaiting}") Добавить
             div(class='error row', data-bind='visible: addMovie.errorVisible')
                 div(data-bind='text: addMovie.errorCaption')
                 div(class='button-close', data-bind='click: addMovie.closeError') x
+            div(class='waiting row', data-bind='visible: addMovie.isWaiting')
+                img(src='images/waiting.gif')
+                span Пожалуйста, подождите пока ваш фильм добавляется!
             div(class='info row')
                 span Для добавления фильма необходимо ввести url (ссылку на него) в поле выше. На данные момент поддерживаются только ссылки с 
                 span(data-bind='visible: parsers.length == 1') сайта

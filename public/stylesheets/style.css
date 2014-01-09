@@ -425,6 +425,23 @@ img.exua{
     position: relative;
 }
 
+.movie-add > .waiting{
+    background: lightblue;
+    margin: 15px 150px;
+    border: 1px dashed rgb(181, 231, 255);
+    border-radius: 10px;
+    padding: 5px;
+    text-align: center;
+    position: relative;
+}
+
+.movie-add > .waiting > span{
+    margin: 5px;
+    color: gray;
+    font-size: 13pt;
+    text-shadow: 0 0 12px white, 0 0 5px white, 0 0 1px white;
+}
+
 .movie-add > .error > .button-close{
     float: none;
     position: absolute;
