@@ -1,9 +1,52 @@
 function Viewmodel(model){
+    var self = this;
     var serviceUrl = location.protocol+'//'+location.hostname+(location.port ? ':'+location.port: '');
 
     this.addMovie = new AddMovieController(this, serviceUrl);
-
     this.page = ko.observable(Global.Pages.Main);
+
+    //ROUTING
+    this.gotoMainPage = function(){
+        location.hash = '';
+    }
+
+    this.gotoMovieDetailsPage = function(movie){
+        location.hash = 'movie/' + movie.id;
+    }
+
+    this.gotoLoginPage = function(){
+        location.hash = 'login'
+    }
+
+    Sammy(function(){
+        this.get('#movie/:id', function(){
+            var id = this.params.id;
+
+            var currentMovie = null;
+            ko.utils.arrayForEach(self.movies(), function(movie) {
+                if (movie.id == id) currentMovie = movie;
+            });
+
+            if (currentMovie){
+                self.movieDetails(currentMovie);
+                self.page(Global.Pages.Details);
+            } else {
+                self.page(Global.Pages.Main);
+            }
+        });
+
+        this.get('#login', function(){
+            if (!self.isAuthorised())
+                self.page(Global.Pages.Login);
+            else
+                self.page(Global.Pages.Main);
+        });
+
+        this.get('', function(){
+            self.page(Global.Pages.Main);
+        });
+    }).run();
+
     this.user = ko.observable(model.user? model.user : {});
     this.movies = ko.observableArray(model.movies? model.movies: []);
     this.parsers = model.parsers;
@@ -30,9 +73,10 @@ function Viewmodel(model){
         Utils.get(serviceUrl + '/api/get', {},
             $.proxy(function(model){
                 this.movies(model.movies? model.movies: []);
-                this.page(Global.Pages.Main);
+
                 if (data && data.user)
                     this.user(data.user);
+                this.gotoMainPage();
             }, this));
     }, this);
 
@@ -69,12 +113,11 @@ function Viewmodel(model){
         this.loginBox('');
         this.pswdBox('');
 
-        this.page(Global.Pages.Main);
+        this.gotoMainPage();
     };
 
-    this.onMovieClick = $.proxy(function(obj, event){
-        this.movieDetails(obj);
-        this.page(Global.Pages.Details);
+    this.onMovieClick = $.proxy(function(movie, event){
+        this.gotoMovieDetailsPage(movie);
     }, this);
 
     this.addNewMovieClick = function(){
@@ -82,7 +125,7 @@ function Viewmodel(model){
     };
 
     this.returnHomeClick = function(){
-        this.page(Global.Pages.Main);
+        this.gotoMainPage();
     };
 
     var openNewWindow = $.proxy(function(pathPattern){
@@ -116,7 +159,7 @@ function Viewmodel(model){
         this.pswdBox('');
 
         if (!this.isAuthorised()){
-            this.page(Global.Pages.Login);
+            this.gotoLoginPage();
         }
     };
 
@@ -153,7 +196,7 @@ function AddMovieController(model, serviceUrl){
         model.movies(data.movies? data.movies: []);
         this.isWaiting(false);
 
-        model.page(Global.Pages.Main);
+        model.gotoMainPage();
     },this);
 
     this.btnClick = $.proxy(function(){
