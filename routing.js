@@ -8,7 +8,8 @@ var init = function(app){
 	
 	app.get('/api/login', api.login);
     app.post('/api/add', api.add);
-	app.get('/api/get', api.get);
+    app.get('/api/get', api.get);
+    app.get('/api/getall', api.getall);
     app.post('/api/delete', api.delete);
 };
 

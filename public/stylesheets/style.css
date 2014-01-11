@@ -5,7 +5,6 @@ body {
 
 .page{
     background: white;
-    min-height: 520px;
     box-shadow: 0 0 2px black;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -19,9 +18,9 @@ a {
 div.header{
     text-align: left;
     padding-left: 95px;
-    padding-bottom: 80px;
+    padding-bottom: 90px;
     font-family: 'Marck Script', cursive;
-    font-size: 45pt;
+    font-size: 40pt;
     text-shadow: 2px 2px 2px rgb(148, 136, 87), 3px 3px 2px black, 0 0 5px white, 0 0 10px white, 0 0 20px white, 0 0 50px white;
     color: lightyellow;
     position: relative;
@@ -113,11 +112,57 @@ div.header .separator{
 }
 
 div.control{
-    opacity: 0.75;
     width: 100%;
     height: 45px;
-    background: linear-gradient(0deg, gold 5%, palegoldenrod 80%);
     margin-top: -45px;
+    position: relative;
+    z-index: 100;
+}
+
+.control > .nav{
+    background: rgba(255,255,255,0.75);
+    padding: 5px;
+}
+
+.control > .nav> li > a{
+    padding: 8px 15px;
+    margin: 2px 5px;
+}
+
+.control .dropdown-menu> li > a.selected{
+
+}
+
+.control .nav-pills .caret{
+    margin-left: 5px;
+}
+
+.control .nav-pills>li.active>a{
+    color: #fff;
+    background: rgba(0, 132, 255, 0.7);
+    box-shadow: 0 0 6px rgb(0, 132, 255);
+}
+.control .nav>li>a:hover, .control .nav>li>a:focus{
+    background: rgb(0, 132, 255);
+    color: white;
+}
+.control .dropdown-menu>li>a:hover, .control .dropdown-menu>li>a:focus{
+    background: rgb(0, 132, 255);
+    color: white;
+}
+
+.control .dropdown-menu>li>a>.glyphicon{
+    margin-left: -12px;
+    margin-right: -2px;
+    color: rgba(0, 132, 255, 0.7);
+}
+
+.control .dropdown-menu>li>a>.text{
+    margin-left: 7px;
+}
+
+.control .dropdown-menu>li>a:hover>.glyphicon{
+    color: white;
 }
 
 .auth-none{
@@ -214,17 +259,16 @@ img.exua{
 }
 
 .movie{
-    height: 233px;
     overflow: hidden;
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 0 0 10px black;
     transition: 0.45s all;
     opacity: 1;
-    background-size: contain !important;
+    background-position-x: center !important;
     display: inline-block;
     height: 200px;
-    width: 24%;
+    width: 23%;
     position: relative;
     margin: 10px 5px;
 }
@@ -237,7 +281,7 @@ img.exua{
     position: absolute;
     bottom: 0px;
     left: 5px;
-    max-width: 265px;
+    max-width: 95%;
     max-height: 55px;
     font-size: 14pt;
     text-align: center;
@@ -248,9 +292,11 @@ img.exua{
     text-shadow: 1px 1px 5px gray;
     box-shadow: 0 0 10px black;
     cursor: pointer;
-    overflow-y: hidden;
     opacity: 0.9;
     margin: 5px auto;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    word-wrap: break-word;
 }
 
 .movie > .owner{
@@ -277,16 +323,20 @@ img.exua{
     padding-bottom: 20px;
 }
 
+.details .col-left{
+    text-align:center;
+}
+
 .details .details-image{
     max-width: 270px;
     background: lightgray;
-    float: left;
     position: relative;
     min-height: 1px;
     display: block;
     margin: 0 20px;
     border-radius: 15px;
     box-shadow: 1px 1px 2px black;
+    display: inline-block;
 }
 
 .details .details-image > img{
@@ -605,4 +655,8 @@ img.exua{
 
 .login .caption-register:hover{
     text-decoration: underline;
+}
+
+.navbar-brand{
+    padding: 12px 15px;
 }

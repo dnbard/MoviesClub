@@ -25,6 +25,23 @@ block content
                         button(class='btn btn-info') ?
             div(class='separator')
         div(class='control')
+            ul(class='nav nav-pills')
+                li(class='dropdown', data-bind='css:{active: page() == Global.Pages.Main}, visible: isAuthorised')
+                    a(class='dropdown-toggle', data-toggle='dropdown', href='#') Главная
+                        span(class='caret')
+                    ul(class='dropdown-menu', role='menu', id='dropdown')
+                        li
+                            a(href='#get-own', data-bind=' click: onShowOwnMovies')
+                                span(class='glyphicon glyphicon-ok', data-bind='visible: isOwnMovies')
+                                span(class='text') Мои фильмы
+                        li
+                            a(href='#get-all', data-bind='click: onShowAllMovies')
+                                span(class='glyphicon glyphicon-ok', data-bind='visible: !isOwnMovies()')
+                                span(class='text') Все фильмы
+                li(data-bind='css:{active: page() == Global.Pages.Main}, visible: !isAuthorised()')
+                    a(href='#') Главная
+                li(data-bind='css:{active: page() == Global.Pages.AddMovie}, visible: isAuthorised')
+                    a(href='#add', data-bind='click: addNewMovieClick') Добавить кино
 
         div(class='first page row', data-bind='visible: page() == Global.Pages.Main')
             cdiv(class='main', data-bind="foreach: movies")
@@ -35,7 +52,7 @@ block content
                         img(src='images/user.png')
                         span(data-bind='text: owner')
 
-            div(class='movie-container', data-bind='visible: isAuthorised')
+            //div(class='movie-container', data-bind='visible: isAuthorised')
                 div(class='add')
                     div(class='plus', data-bind="click: addNewMovieClick") +
                         div(class='text') Добавить новое кино
@@ -64,7 +81,7 @@ block content
                     a(class='parser', target='_blank' data-bind='attr: {href: "http://"+site}, text: site')
 
         div(class='details page row', data-bind='visible: page() == Global.Pages.Details')
-            div(class='col-md-3')
+            div(class='col-left col-md-4')
                 img(class='details-image row', data-bind='attr:{src: movieDetails().image}')
                 div(class='btn-group', data-bind='visible: isAuthorised')
                     button(type='button', class='btn btn-default btn-first dropdown-toggle', data-bind='click: onExuaWatch')
@@ -91,7 +108,7 @@ block content
                                 span(class='glyphicon glyphicon-remove')
                                 span Удалить фильм
 
-            div(class='col-md-9')
+            div(class='col-md-8')
                 div(class='details-info')
                     div(class='title')
                         div(class='title-text', data-bind='text: movieDetails().name')

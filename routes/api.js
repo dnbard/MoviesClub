@@ -69,8 +69,20 @@ exports.get = function(req, res){
                 result: true,
                 movies: movies
             });
-        })
-    } 
+        });
+    }
+    else sendNotAuth(req, res);
+}
+
+exports.getall = function(req, res){
+    if (res.locals.auth){
+        Movies.GetAll(function(err, movies){
+            res.send({
+                result: true,
+                movies: movies
+            });
+        });
+    }
     else sendNotAuth(req, res);
 }
 

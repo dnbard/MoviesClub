@@ -50,6 +50,14 @@ function Viewmodel(model){
             self.page(Global.Pages.AddMovie);
         });
 
+        this.get('#get-own', function(){
+            self.GetMoviesInfo();
+        });
+
+        this.get('#get-all', function(){
+            self.GetAllMoviesInfo();
+        });
+
         this.get('', function(){
             self.page(Global.Pages.Main);
         });
@@ -77,15 +85,36 @@ function Viewmodel(model){
 
     this.error = ko.observable({});
 
-    this.GetMoviesInfo = $.proxy(function (data){
-        Utils.get(serviceUrl + '/api/get', {},
-            $.proxy(function(model){
-                this.movies(model.movies? model.movies: []);
+    var bindMovies = $.proxy(function(data, model){
+        this.movies(model.movies? model.movies: []);
+        if (data != 'undefined' && data && data.user)
+            this.user(data.user);
+        this.gotoMainPage();
+    }, this);
 
-                if (data && data.user)
-                    this.user(data.user);
-                this.gotoMainPage();
-            }, this));
+    this.isOwnMovies = ko.computed(function(){
+        if (!this.isAuthorised()) return false;
+
+        var user = null;
+        var result = true;
+        ko.utils.arrayForEach(this.movies(), function(movie){
+            if (user == null) user = movie.owner;
+            else if (user != movie.owner) result = false;
+        });
+
+        return result;
+    }, this);
+
+    this.GetMoviesInfo = $.proxy(function (data){
+        Utils.get(serviceUrl + '/api/get', {}, function(model){
+            bindMovies(data, model);
+        });
+    }, this);
+
+    this.GetAllMoviesInfo = $.proxy(function (data){
+        Utils.get(serviceUrl + '/api/getall', {}, function(model){
+            bindMovies(data, model);
+        });
     }, this);
 
     this.onLoginClick = function(){
@@ -186,6 +215,21 @@ function Viewmodel(model){
         Utils.post(serviceUrl + '/api/delete', {
             movie: movie.id
         }, this.GetMoviesInfo);
+    }
+
+    var closeDropdown = function(dropdown){
+        var menu = $(dropdown);
+        menu.dropdown('toggle');
+    }
+
+    this.onShowOwnMovies = function(obj, event){
+        closeDropdown('.control .dropdown-toggle');
+        location.hash='get-own';
+    }
+
+    this.onShowAllMovies = function(obj, event){
+        closeDropdown('.control .dropdown-toggle');
+        location.hash='get-all';
     }
 }
 
