@@ -18,6 +18,10 @@ function Viewmodel(model){
         location.hash = 'login'
     }
 
+    this.gotoAddMoviePage = function(){
+        location.hash = 'add'
+    }
+
     Sammy(function(){
         this.get('#movie/:id', function(){
             var id = this.params.id;
@@ -40,6 +44,10 @@ function Viewmodel(model){
                 self.page(Global.Pages.Login);
             else
                 self.page(Global.Pages.Main);
+        });
+
+        this.get('#add', function(){
+            self.page(Global.Pages.AddMovie);
         });
 
         this.get('', function(){
@@ -184,12 +192,13 @@ function Viewmodel(model){
 function AddMovieController(model, serviceUrl){
     this.url = ko.observable('');
     this.errorCaption = ko.observable('');
+    this.isWaiting = ko.observable(false);
 
     this.show = function(){
         this.url('');
         this.errorCaption('');
         this.isWaiting(false);
-        model.page(Global.Pages.AddMovie);
+        model.gotoAddMoviePage();
     }
 
     var onGetCallback = $.proxy(function(data){
@@ -227,6 +236,4 @@ function AddMovieController(model, serviceUrl){
     this.errorVisible = ko.computed(function(){
         return this.errorCaption && this.errorCaption().length > 0;
     }, this);
-
-    this.isWaiting = ko.observable(false);
 }
