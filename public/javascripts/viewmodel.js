@@ -258,6 +258,9 @@ function AddMovieController(model, serviceUrl){
         var url = this.url();
         if (!Utils.stringContains(url, 'http'))
             url = 'http://' + url;
+
+        url = encodeURI(url);
+
         var isValid = Utils.isValidUrl(url);
         if (!isValid) {
             this.errorCaption('Введеный url не верен.');
