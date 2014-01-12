@@ -127,6 +127,7 @@ div.control{
 .control > .nav> li > a{
     padding: 8px 15px;
     margin: 2px 5px;
+    transition: 0.25s all;
 }
 
 .control .dropdown-menu> li > a.selected{

@@ -244,6 +244,8 @@ function Viewmodel(model){
 }
 
 function AddMovieController(model, serviceUrl){
+    var self = this;
+
     this.url = ko.observable('');
     this.errorCaption = ko.observable('');
     this.isWaiting = ko.observable(false);
@@ -280,9 +282,10 @@ function AddMovieController(model, serviceUrl){
             Utils.post(serviceUrl + '/api/add', {
                 url: url
             }, model.GetMoviesInfo,
-            function(){
-                Utils.alert('Can\'t delete this movie. Something went wrong. Please report this issue.')
-            });
+                $.proxy(function(){
+                this.errorCaption('Can\'t delete this movie. Something went wrong. Please report this issue.');
+                this.isWaiting(false);
+            },this));
         }
     }, this);
 
