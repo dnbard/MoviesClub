@@ -660,3 +660,24 @@ img.exua{
 .navbar-brand{
     padding: 12px 15px;
 }
+
+.loading-holder{
+    background: rgba(0,0,0,0.5);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.loading-holder > .loading-indicator{
+    width: 54px;
+    height: 55px;
+    background: url(../images/waiting-big.gif);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}

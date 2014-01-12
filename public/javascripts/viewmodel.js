@@ -5,6 +5,8 @@ function Viewmodel(model){
     this.addMovie = new AddMovieController(this, serviceUrl);
     this.page = ko.observable(Global.Pages.Main);
 
+    this.loading = new LoadingControl(this);
+
     //ROUTING
     this.gotoMainPage = function(){
         location.hash = '';
@@ -106,14 +108,20 @@ function Viewmodel(model){
     }, this);
 
     this.GetMoviesInfo = $.proxy(function (data){
+        var loading = this.loading;
+        loading.show();
         Utils.get(serviceUrl + '/api/get', {}, function(model){
             bindMovies(data, model);
+            loading.hide();
         });
     }, this);
 
     this.GetAllMoviesInfo = $.proxy(function (data){
+        var loading = this.loading;
+        loading.show();
         Utils.get(serviceUrl + '/api/getall', {}, function(model){
             bindMovies(data, model);
+            loading.hide();
         });
     }, this);
 
@@ -212,6 +220,8 @@ function Viewmodel(model){
 
     this.onDeleteMovie = function(){
         var movie = this.movieDetails();
+        this.loading.show();
+        //loading will be hidden in GetMoviesInfo directive
         Utils.post(serviceUrl + '/api/delete', {
             movie: movie.id
         }, this.GetMoviesInfo);
