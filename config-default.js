@@ -5,6 +5,10 @@ var databaseConnectionString = 'mongodb://<user>:<password>@<host>:<port>/<dbnam
 
 var parsers = [
     {
+        site: 'kinopoisk.ru',
+        parser: 'kinopoisk'
+    },
+    {
         site:'kinobaza.tv',
         parser: 'kinobaza'
     }
