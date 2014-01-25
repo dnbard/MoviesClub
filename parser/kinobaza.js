@@ -10,7 +10,6 @@ function parse($, callback){
         genres: parseGenres($)
     }
 
-    console.log('done');
     callback(movie);
 }
 
@@ -34,7 +33,6 @@ function parseGenres($){
         if (add) result.push(genre);
     });
 
-    console.log('genres');
     return result;
 }
 
@@ -53,7 +51,6 @@ function parseRatings($){
             });
     });
 
-    console.log('ratings');
     return result;
 }
 
@@ -69,7 +66,6 @@ function parseName($){
     title = title.replace('«', '');
     title = title.replace('»', '');
 
-    console.log('name');
     return title;
 }
 
@@ -82,7 +78,6 @@ function parseDesc($){
         desc += $(this).text();
     });
 
-    console.log('desc');
     return desc;
 }
 
@@ -98,11 +93,9 @@ function parseImage($){
         var image = internal.parseImage($, selector);
         if (image != null)
         {
-            console.log('image');
             return image;
         }
     }
-    console.log('image null');
     return null;    
 }
 
