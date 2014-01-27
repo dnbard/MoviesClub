@@ -264,7 +264,6 @@ img.exua{
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 0 0 10px black;
-    transition: 0.45s all;
     opacity: 1;
     background-position-x: center !important;
     display: inline-block;
@@ -272,6 +271,34 @@ img.exua{
     width: 23%;
     position: relative;
     margin: 10px 5px;
+}
+
+@media(min-width: 997px){
+    .movie{
+        height: 250px;
+    }
+}
+
+@media(min-width: 1200px){
+    .movie{
+        height: 330px;
+    }
+}
+
+@media(min-width: 1500px){
+    .movie{
+        height: 400px;
+    }
+}
+
+@media(min-width: 1900px){
+    .container{
+        width: 1590px;
+    }
+
+    .movie{
+        height: 500px;
+    }
 }
 
 .movie:hover{
