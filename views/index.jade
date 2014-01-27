@@ -70,11 +70,12 @@ block content
                 img(src='images/waiting.gif')
                 span Пожалуйста, подождите пока ваш фильм добавляется!
             div(class='info row')
-                span Для добавления фильма необходимо ввести url (ссылку на него) в поле выше. На данные момент поддерживаются только ссылки с 
-                span(data-bind='visible: parsers.length == 1') сайта
-                span(data-bind='visible: parsers.length > 1') сайтов:
-                span(data-bind='foreach: parsers')
-                    a(class='parser', target='_blank' data-bind='attr: {href: "http://"+site}, text: site')
+                span Для добавления фильма необходимо ввести url (ссылку на него) в поле выше. На данные момент поддерживаются ссылки
+                span(data-bind='visible: parsers.length == 1')  c сайта
+                span(data-bind='visible: parsers.length > 1')  c сайтов:
+                div(class='parsers', data-bind='foreach: parsers')
+                    a(class='parser', target='_blank' data-bind='attr: {href: "http://"+site}')
+                        img(data-bind='attr:{src: "/images/" + site + "-big.png"}')
 
         div(class='details page row', data-bind='visible: page() == Global.Pages.Details')
             div(class='details-background', data-bind='style: {background: "url(" + movieDetails().image + ")"}')

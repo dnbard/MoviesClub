@@ -609,9 +609,23 @@ img.exua{
     opacity: 0.75;
 }
 
+.parsers{
+    text-align: center;
+}
+
 .parser {
     margin: 0 5px;
     font-weight: bold;
+    transition: 0.25s all;
+    opacity: 0.60;
+}
+
+.parser > img{
+    max-width: 250px;
+}
+
+.parser:hover{
+    opacity: 1;
 }
 
 .register-box{
