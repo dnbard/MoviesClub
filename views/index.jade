@@ -47,17 +47,11 @@ block content
 
         div(class='first page row', data-bind='visible: page() == Global.Pages.Main')
             cdiv(class='main', data-bind="foreach: movies")
-                //div(class='movie-container col-md-4')
                 div(class='movie', data-bind='style: {background: "url("+image+")"}, click: $parent.onMovieClick')
                     p(class='name', data-bind='text: name')
                     p(class='owner')
                         img(src='images/user.png')
                         span(data-bind='text: owner')
-
-            //div(class='movie-container', data-bind='visible: isAuthorised')
-                div(class='add')
-                    div(class='plus', data-bind="click: addNewMovieClick") +
-                        div(class='text') Добавить новое кино
 
         div(class='movie-add page row', data-bind='visible: page()== Global.Pages.AddMovie')
             div(class='title') Добавить новый фильм в коллекцию
@@ -83,6 +77,7 @@ block content
                     a(class='parser', target='_blank' data-bind='attr: {href: "http://"+site}, text: site')
 
         div(class='details page row', data-bind='visible: page() == Global.Pages.Details')
+            div(class='details-background', data-bind='style: {background: "url(" + movieDetails().image + ")"}')
             div(class='col-left col-md-4')
                 img(class='details-image row', data-bind='attr:{src: movieDetails().image}')
                 div(class='btn-group', data-bind='visible: isAuthorised')

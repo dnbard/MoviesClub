@@ -349,6 +349,17 @@ img.exua{
     min-height: 0px;
     padding-top:25px;
     padding-bottom: 20px;
+    position: relative;
+}
+
+.details-background{
+    width: 100%;
+    background-position: center !important;
+    background-size: cover !important;
+    height: 100%;
+    position: absolute;
+    opacity: 0.10;
+    top: 0px;
 }
 
 .details .col-left{
