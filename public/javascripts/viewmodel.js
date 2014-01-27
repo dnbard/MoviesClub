@@ -190,6 +190,10 @@ function Viewmodel(model){
         openNewWindow("http://vk.com/video?q={0}&section=search");
     };
 
+    this.onMegogoWatch = function(){
+        openNewWindow("http://megogo.net/ru/search?q={0}");
+    };
+
     this.onKinopoiskSearch = function(){
         openNewWindow("http://www.kinopoisk.ru/index.php?first=no&what=&kp_query={0}");
     };
