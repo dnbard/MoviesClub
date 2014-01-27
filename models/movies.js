@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
-    Users = require('./users.js');
+    Users = require('./users.js'),
+    utils = require('../utils.js');
 
 var moviesSchema = mongoose.Schema({
     name: String,
@@ -71,9 +72,9 @@ var getByUser = function(userId, callback){
 
 var addMovie = function(movie, user, callback){
     var ent = new Movies();
-    ent.name = movie.title;
+    ent.name = utils.stringNormalize(movie.title);
     ent.image = movie.image;
-    ent.desc = movie.description;
+    ent.desc = utils.stringNormalize(movie.description);
     ent.owner = user.id;
     ent.ratings = movie.ratings;
     ent.genres = movie.genres;
