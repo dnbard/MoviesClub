@@ -412,8 +412,8 @@ img.exua{
 }
 
 .details .details-info.low > .desc{
-    box-shadow: 0px 0px 2px darkgray;
-    background: rgba(0, 0, 0, 0.03);
+    box-shadow: 0px 0px 2px gray;
+    background: rgba(230, 230, 230, 0.44);
 }
 
 .details .details-info > .desc img{
