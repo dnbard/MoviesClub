@@ -493,7 +493,7 @@ img.exua{
 .movie-add > .holder > .plus {
     height: 75px;
     background: rgba(0, 0, 0, 0.03);
-    margin: 6px;
+    margin: 6px 0;
     text-align: center;
     font-size: 75px;
     line-height: 100%;
@@ -507,7 +507,6 @@ img.exua{
 
 .movie-add > .holder > .button-holder {
     padding: 14px 0px;
-    width: 23%;
 }
 
 .movie-add > .holder > .button-holder > button {
