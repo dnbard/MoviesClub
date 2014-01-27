@@ -12,6 +12,8 @@ function parse(url, callback, failure){
             var parserPath = utils.format('./{0}.js', e.parser);
             var parser = require(parserPath);
             loadHtml(url, e.parser == 'kinopoisk', function($){
+                if ($ == null) failure();
+
                 parser.parse($, callback);
                 isParserActivated = true;
 
@@ -38,6 +40,9 @@ function loadHtml(url, isBinary, callback){
 
             var $ = cheerio.load(body);
             callback($);
+        }
+        else {
+            callback(null);
         }
     }).end();
 }
