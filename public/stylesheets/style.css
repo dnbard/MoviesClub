@@ -11,6 +11,10 @@ body {
     margin-bottom: 25px;
 }
 
+.container{
+    margin-bottom: 25px;
+}
+
 a {
     color: #00B7FF;
 }
@@ -18,14 +22,14 @@ a {
 div.header{
     text-align: left;
     padding-left: 95px;
-    padding-bottom: 90px;
+    padding-bottom: 60px;
     font-family: 'Marck Script', cursive;
     font-size: 40pt;
     text-shadow: 2px 2px 2px rgb(148, 136, 87), 3px 3px 2px black, 0 0 5px white, 0 0 10px white, 0 0 20px white, 0 0 50px white;
     color: lightyellow;
     position: relative;
-    background: repeating-linear-gradient(-45deg, goldenrod, darkgoldenrod 15px, #db0 15px, gold 38px);
     box-shadow: 0 0 2px black;
+    background: url(../images/stripes.png);
 }
 
 div.header > img{
@@ -36,7 +40,7 @@ div.header > img{
 
 div.header > .user-info{
     position: absolute;
-    top: 15px;
+    top: 10px;
     font-size: 16pt;
     text-shadow: 1px 1px 2px black, 1px 1px 2px black;
     padding: 10px;
@@ -291,7 +295,7 @@ img.exua{
     }
 }
 
-@media(min-width: 1900px){
+@media(min-width: 1800px){
     .container{
         width: 1590px;
     }

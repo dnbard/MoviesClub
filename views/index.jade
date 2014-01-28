@@ -25,7 +25,6 @@ block content
                         button(class='btn btn-primary', data-bind='click: onLoginClick') Войти
                     div(class='login-holder')
                         button(class='btn btn-info') ?
-            div(class='separator')
         div(class='control')
             ul(class='nav nav-pills')
                 li(class='dropdown', data-bind='css:{active: page() == Global.Pages.Main}, visible: isAuthorised')
@@ -138,7 +137,7 @@ block content
                         b
                             span(data-bind='text: movieDetails().owner')
 
-            div(class='col-md-12')
+            div(class='row col-md-12')
                 div(class='register-box alert alert-info', data-bind='visible: !isAuthorised()')
                     span(class='caption-register') Зарегистрируйтесь
                     span или
