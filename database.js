@@ -1,5 +1,7 @@
 var mongoose = require('mongoose'), 
-    config = require('./config.js');
+    config = require('./config.js'),
+    fs = require('fs'),
+    migrations = require('./models/migrations.js');
 
 var cString = config.databaseConnectionString;
 
@@ -32,4 +34,31 @@ function connect(callback){
     };
 }
 
+function migration(){
+    var migrationFiles = fs.readdirSync('./migrations');
+
+    if (migrationFiles.length > 0){
+        migrations.getAll(function(err, migrationList){
+            for(var i = 0; i < migrationFiles.length; i ++){
+                var isApplied = false;
+
+                for(var j = 0; j < migrationList.length; j ++){
+                    if (migrationList[i].name == migrationFiles[i]){
+                        isApplied = true;
+                        break;
+                    }
+                }
+
+                if (!isApplied){
+                    var migration = require('./migrations/' + migrationFiles[i]);
+                    migration.apply();
+
+                    migrations.save(migrationFiles[i]);
+                }
+            }
+        });
+    }
+}
+
 exports.connect = connect;
+exports.migration = migration;
