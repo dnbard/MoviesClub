@@ -39,7 +39,12 @@ function trim(str)
 };
 
 function stringNormalize (str){
-    str = str.replace('&nbsp;', ' ');
+    var escapeStrings = [
+        '&nbsp;', '<span>', '</span>'
+    ];
+
+    for(var i = 0; i < escapeStrings.length; i ++)
+        str = str.replace(escapeStrings[i], ' ');
 
     return str;
 }
