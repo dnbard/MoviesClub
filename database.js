@@ -43,7 +43,7 @@ function migration(){
                 var isApplied = false;
 
                 for(var j = 0; j < migrationList.length; j ++){
-                    if (migrationList[i].name == migrationFiles[i]){
+                    if (migrationList[j].name == migrationFiles[i]){
                         isApplied = true;
                         break;
                     }
@@ -51,9 +51,9 @@ function migration(){
 
                 if (!isApplied){
                     var migration = require('./migrations/' + migrationFiles[i]);
-                    migration.apply();
-
-                    migrations.save(migrationFiles[i]);
+                    migration.apply(migrationFiles[i], function(migrationName){
+                        migrations.save(migrationName);
+                    });
                 }
             }
         });

@@ -1,1 +1,3 @@
-exports.apply = function(){}
+exports.apply = function(migrationName, callback){
+    callback(migrationName);
+}

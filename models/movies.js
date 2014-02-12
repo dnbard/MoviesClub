@@ -12,7 +12,8 @@ var moviesSchema = mongoose.Schema({
         provider: String,
         rating: String
     }],
-    genres: [String]
+    genres: [String],
+    watched: Boolean
 });
 
 var Movies = mongoose.model('Movies', moviesSchema);
@@ -60,6 +61,14 @@ var getAll = function(callback){
     });
 }
 
+var getAllInternal = function(callback){
+    Movies.find({}, null, {sort: {_id: -1}}, function(err, movies){
+        if (err) callback(err);
+
+        callback(null, movies);
+    });
+}
+
 var getByUser = function(userId, callback){
     Movies.find({owner: userId}, null, {sort: {_id: -1}}, function(err, movies){
         if (err) callback(err);
@@ -90,6 +99,7 @@ var deleteMovie = function(id, userid, success, failure){
 
 exports.Movies = Movies;
 exports.GetAll = getAll;
+exports.GetAllInternal = getAllInternal;
 exports.GetByUser = getByUser;
 
 exports.Add = addMovie;
