@@ -252,6 +252,17 @@ function Viewmodel(model){
     this.onToggleWatchedMovies = function(){
         this.showWatchedMovies(!this.showWatchedMovies());
     }
+
+    this.passwordOnChange = function(model,event){
+        var keyCode = event.keyCode;
+
+        if (keyCode == 13){
+            //enter pressed
+            this.onLoginClick();
+        }
+
+        return true;
+    }
 }
 
 function AddMovieController(model, serviceUrl){
