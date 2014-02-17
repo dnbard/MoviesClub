@@ -281,6 +281,24 @@ img.exua{
     margin: 10px 5px;
 }
 
+.movie.watched{
+    opacity: 0.5;
+    box-shadow: 0 0 1px black;
+}
+
+.movie > .watched-icon{
+    width: 95%;
+    font-size: 25pt;
+    margin-top: 2px;
+    text-align: right;
+    color: gray;
+}
+
+.movie.watched:hover{
+    opacity: 0.9;
+    box-shadow: 0 0 1px black;
+}
+
 @media(min-width: 997px){
     .movie{
         height: 250px;

@@ -103,3 +103,20 @@ exports.delete = function(req, res){
             });
     } else sendNotAuth(req, res);
 }
+
+exports.watch = function(req, res){
+    if (res.locals.auth){
+        var movieId = req.body.movie,
+            userId = res.locals.user.id;
+        Movies.ToggleWatch(movieId, userId, function(err){
+            if (err) {
+                res.status(400).send();
+            } else {
+                res.send({
+                    result: true
+                });
+            }
+        });
+
+    } else sendNotAuth(req, res);
+}

@@ -11,6 +11,7 @@ var init = function(app){
     app.get('/api/get', api.get);
     app.get('/api/getall', api.getall);
     app.post('/api/delete', api.delete);
+    app.post('/api/watch', api.watch);
 };
 
 exports.init = init;

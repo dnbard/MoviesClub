@@ -20,7 +20,7 @@ block content
                         input(data-bind='value: loginBox')
                         <br/>
                         span Пароль
-                        input(type='password', data-bind='value: pswdBox')
+                        input(type='password', data-bind='value: pswdBox, event:{keypress: passwordOnChange}')
                     div(class='login-holder')
                         button(class='btn btn-primary', data-bind='click: onLoginClick') Войти
                     div(class='login-holder')
@@ -49,12 +49,14 @@ block content
                     a(href='#add', data-bind='click: addNewMovieClick') Добавить кино
 
         div(class='first page row', data-bind='visible: page() == Global.Pages.Main')
-            cdiv(class='main', data-bind="foreach: movies")
-                div(class='movie', data-bind='style: {background: "url("+image+")"}, click: $parent.onMovieClick, visible:$parent.showWatchedMovies() || !watched')
+            cdiv(class='main', data-bind='foreach: movies')
+                div(class='movie',
+                    data-bind='style: {background: "url("+image+")"}, css: {watched: watched}, click: $parent.onMovieClick, visible:!$parent.isAuthorised() || $parent.showWatchedMovies() || !watched')
                     p(class='name', data-bind='text: name')
                     p(class='owner')
                         img(src='images/user.png')
                         span(data-bind='text: owner')
+                    div(class='watched-icon glyphicon glyphicon-eye-open', data-bind='visible: watched')
 
         div(class='movie-add page row', data-bind='visible: page()== Global.Pages.AddMovie')
             div(class='title') Добавить новый фильм в коллекцию
@@ -108,10 +110,14 @@ block content
                                 img(class='icon', src='images/rutracker.png')
                                 span Искать на RuTracker
                         li(class='divider')
-                        li(data-bind='visible: user && movieDetails && user.id == movieDetails.owner')
+                        li(data-bind='visible: false && user && movieDetails && user().id == movieDetails().ownerId')
                             a(href='#', data-bind='click: onDeleteMovie')
                                 span(class='glyphicon glyphicon-remove')
                                 span Удалить фильм
+                        li(data-bind='visible: user && movieDetails && user().id == movieDetails().ownerId')
+                            a(href='#', data-bind='click: onWatchMovie')
+                                span(class='glyphicon glyphicon-eye-open')
+                                span(data-bind='text: movieDetails && movieDetails().watched?"Сделать непросмотренным":"Фильм просмотрен"')
 
 
             div(class='col-md-8')
@@ -140,6 +146,10 @@ block content
                         img(src='images/user.png')
                         b
                             span(data-bind='text: movieDetails().owner')
+
+                div(class='details-info low', data-bind='visible: movieDetails().watched')
+                    div(class='desc') Пользователь уже просмотрел этот фильм
+
 
             div(class='row col-md-12')
                 div(class='register-box alert alert-info', data-bind='visible: !isAuthorised()')

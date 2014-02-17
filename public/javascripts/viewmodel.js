@@ -68,7 +68,6 @@ function Viewmodel(model){
     }).run();
 
     var bindMovies = $.proxy(function(data, model){
-        if (model.movies) addMoviesParams(model.movies);
         this.movies(model.movies? model.movies: []);
         if (data != 'undefined' && data && data.user)
             this.user(data.user);
@@ -232,6 +231,19 @@ function Viewmodel(model){
         Utils.post(serviceUrl + '/api/delete', {
             movie: movie.id
         }, this.GetMoviesInfo);
+    }
+
+    this.onWatchMovie = function(){
+        var movie = this.movieDetails();
+        this.loading.show();
+        Utils.post(serviceUrl + '/api/watch', {
+            movie: movie.id
+        },function(data){
+            window.location = serviceUrl;
+        }, function(){
+            self.loading.hide();
+            alert('error');
+        })
     }
 
     var closeDropdown = function(dropdown){

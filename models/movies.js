@@ -18,7 +18,6 @@ var moviesSchema = mongoose.Schema({
 
 var Movies = mongoose.model('Movies', moviesSchema);
 
-
 function GetOwnerName(users, userId){
     for(var i = 0; i < users.length; i ++){
         var user = users[i];
@@ -41,6 +40,7 @@ function FormatMoviesList(movies, callback){
                 desc: movie.desc,
                 image: movie.image,
                 owner: owner,
+                ownerId: movie.owner,
                 id: movie._id,
                 ratings: movie.ratings,
                 genres: movie.genres,
@@ -99,6 +99,17 @@ var deleteMovie = function(id, userid, success, failure){
     });
 }
 
+var toggleWatch = function(movieId, userId, result){
+    Movies.findOne({owner: userId, _id: movieId}, function(err, movie){
+        if (err) result(err);
+        if (!movie) result(true);
+
+        movie.watched = !movie.watched;
+        movie.save();
+        result(false);
+    });
+}
+
 exports.Movies = Movies;
 exports.GetAll = getAll;
 exports.GetAllInternal = getAllInternal;
@@ -106,3 +117,4 @@ exports.GetByUser = getByUser;
 
 exports.Add = addMovie;
 exports.Delete = deleteMovie;
+exports.ToggleWatch = toggleWatch;
