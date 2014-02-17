@@ -15,7 +15,13 @@ exports.login = function(req, res){
 
     Users.Find(name, pass, 
         function(user){
-            res.cookie('uid', user.token);
+            res.cookie(
+                'uid', 
+                user.token, 
+                { 
+                    maxAge: 2592000000, 
+                    httpOnly: false
+                });
             res.send({
                 user: {
                     name: user.name,
