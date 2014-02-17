@@ -26,46 +26,48 @@ function Viewmodel(model){
         location.hash = 'add'
     }
 
-    Sammy(function(){
-        this.get('#movie/:id', function(){
-            var id = this.params.id;
+    $(document).ready(function(){
+        Sammy(function(){
+            this.get('#movie/:id', function(){
+                var id = this.params.id;
 
-            var currentMovie = null;
-            ko.utils.arrayForEach(self.movies(), function(movie) {
-                if (movie.id == id) currentMovie = movie;
+                var currentMovie = null;
+                ko.utils.arrayForEach(self.movies(), function(movie) {
+                    if (movie.id == id) currentMovie = movie;
+                });
+
+                if (currentMovie){
+                    self.movieDetails(currentMovie);
+                    self.page(Global.Pages.Details);
+                } else {
+                    this.redirect('');
+                }
             });
 
-            if (currentMovie){
-                self.movieDetails(currentMovie);
-                self.page(Global.Pages.Details);
-            } else {
+            this.get('#login', function(){
+                if (!self.isAuthorised())
+                    self.page(Global.Pages.Login);
+                else
+                    self.page(Global.Pages.Main);
+            });
+
+            this.get('#add', function(){
+                self.page(Global.Pages.AddMovie);
+            });
+
+            this.get('#get-own', function(){
+                self.GetMoviesInfo();
+            });
+
+            this.get('#get-all', function(){
+                self.GetAllMoviesInfo();
+            });
+
+            this.get('', function(){
                 self.page(Global.Pages.Main);
-            }
-        });
-
-        this.get('#login', function(){
-            if (!self.isAuthorised())
-                self.page(Global.Pages.Login);
-            else
-                self.page(Global.Pages.Main);
-        });
-
-        this.get('#add', function(){
-            self.page(Global.Pages.AddMovie);
-        });
-
-        this.get('#get-own', function(){
-            self.GetMoviesInfo();
-        });
-
-        this.get('#get-all', function(){
-            self.GetAllMoviesInfo();
-        });
-
-        this.get('', function(){
-            self.page(Global.Pages.Main);
-        });
-    }).run();
+            });
+        }).run();
+    });
 
     var bindMovies = $.proxy(function(data, model){
         this.movies(model.movies? model.movies: []);
