@@ -1,21 +1,13 @@
-
-/**
- * Module dependencies.
- */
-
-var express = require('express');
-//var routes = require('./routes');
-//var user = require('./routes/user');
-var http = require('http');
-var path = require('path');
-var db = require('./database.js');
-var bootstrap = require('./bootstrap.js');
-//var api = require('./routes/api.js');
-var routing = require('./routing.js');
+var express = require('express'),
+	http = require('http'),
+	path = require('path'),
+	db = require('./database.js'),
+	bootstrap = require('./bootstrap.js'),
+	routing = require('./routing.js'),
+    commands = require('./commands.js');
 
 var app = express();
 
-// all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -44,5 +36,7 @@ http.createServer(app).listen(port, function(){
 });
 
 db.connect(function(){
-    db.migration();
+    commands.run(function(app){
+        db.migration();
+    });
 });
