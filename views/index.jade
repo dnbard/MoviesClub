@@ -39,6 +39,10 @@ block content
                             a(href='#get-all', data-bind='click: onShowAllMovies')
                                 span(class='glyphicon glyphicon-ok', data-bind='visible: !isOwnMovies()')
                                 span(class='text') Все фильмы
+                        li
+                            a(href='#get-all', data-bind='click: onToggleWatchedMovies')
+                                span(class='glyphicon glyphicon-ok', data-bind='visible: showWatchedMovies')
+                                span(class='text') Показывать просмотренные фильмы
                 li(data-bind='css:{active: page() == Global.Pages.Main}, visible: !isAuthorised()')
                     a(href='#') Главная
                 li(data-bind='css:{active: page() == Global.Pages.AddMovie}, visible: isAuthorised')
@@ -46,7 +50,7 @@ block content
 
         div(class='first page row', data-bind='visible: page() == Global.Pages.Main')
             cdiv(class='main', data-bind="foreach: movies")
-                div(class='movie', data-bind='style: {background: "url("+image+")"}, click: $parent.onMovieClick')
+                div(class='movie', data-bind='style: {background: "url("+image+")"}, click: $parent.onMovieClick, visible:$parent.showWatchedMovies() || !watched')
                     p(class='name', data-bind='text: name')
                     p(class='owner')
                         img(src='images/user.png')

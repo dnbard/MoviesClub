@@ -7,6 +7,8 @@ function Viewmodel(model){
 
     this.loading = new LoadingControl(this);
 
+    this.showWatchedMovies = ko.observable(false);
+
     //ROUTING
     this.gotoMainPage = function(){
         location.hash = '';
@@ -65,6 +67,14 @@ function Viewmodel(model){
         });
     }).run();
 
+    var bindMovies = $.proxy(function(data, model){
+        if (model.movies) addMoviesParams(model.movies);
+        this.movies(model.movies? model.movies: []);
+        if (data != 'undefined' && data && data.user)
+            this.user(data.user);
+        this.gotoMainPage();
+    }, this);
+
     this.user = ko.observable(model.user? model.user : {});
     this.movies = ko.observableArray(model.movies? model.movies: []);
     this.parsers = model.parsers;
@@ -86,13 +96,6 @@ function Viewmodel(model){
     };
 
     this.error = ko.observable({});
-
-    var bindMovies = $.proxy(function(data, model){
-        this.movies(model.movies? model.movies: []);
-        if (data != 'undefined' && data && data.user)
-            this.user(data.user);
-        this.gotoMainPage();
-    }, this);
 
     this.isOwnMovies = ko.computed(function(){
         if (!this.isAuthorised()) return false;
@@ -244,6 +247,10 @@ function Viewmodel(model){
     this.onShowAllMovies = function(obj, event){
         closeDropdown('.control .dropdown-toggle');
         location.hash='get-all';
+    }
+
+    this.onToggleWatchedMovies = function(){
+        this.showWatchedMovies(!this.showWatchedMovies());
     }
 }
 

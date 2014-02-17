@@ -43,7 +43,8 @@ function FormatMoviesList(movies, callback){
                 owner: owner,
                 id: movie._id,
                 ratings: movie.ratings,
-                genres: movie.genres
+                genres: movie.genres,
+                watched: movie.watched
             });
         }
 
@@ -87,6 +88,7 @@ var addMovie = function(movie, user, callback){
     ent.owner = user.id;
     ent.ratings = movie.ratings;
     ent.genres = movie.genres;
+    ent.watched = false;
     ent.save(callback);
 }
 

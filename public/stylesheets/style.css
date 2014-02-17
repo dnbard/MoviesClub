@@ -138,6 +138,10 @@ div.control{
 
 }
 
+.dropdown-menu> li{
+    text-align: left;
+}
+
 .control .nav-pills .caret{
     margin-left: 5px;
 }
