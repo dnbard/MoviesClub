@@ -277,6 +277,20 @@ function Viewmodel(model){
 
         return true;
     }
+
+    this.title = ko.computed(function(){
+        var page = this.page();
+
+        if (page == Global.Pages.Details){
+            return Utils.format('{0} - Кино клуб', this.movieDetails().name);
+        } else if (page == Global.Pages.AddMovie){
+            return 'Добавить новое кино';
+        } else if (page == Global.Pages.Login){
+            return 'Войти в кино клуб';
+        }
+
+        return 'Кино клуб;
+    }, this);
 }
 
 function AddMovieController(model, serviceUrl){

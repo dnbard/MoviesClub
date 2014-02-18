@@ -1,7 +1,7 @@
 doctype html
-html
+html(id='htmlTop')
   head
-    title= title
+    title(data-bind='text: title')= title
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(href='http://fonts.googleapis.com/css?family=Marck+Script&subset=latin,cyrillic', rel='stylesheet', type='text/css')

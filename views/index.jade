@@ -181,5 +181,5 @@ block content
     script.
         var model = !{model};
         $(document).ready(function(){
-            ko.applyBindings(new Viewmodel(model));
+            ko.applyBindings(new Viewmodel(model), document.getElementById('htmlTop'));
         });
