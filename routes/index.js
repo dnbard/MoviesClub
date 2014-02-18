@@ -1,13 +1,15 @@
-var parsers = require('../config.js').parsers;
+var parsers = require('../config.js').parsers,
+    Movies = require('../models/movies.js');
 
 exports.index = function(req, res){
-    var Movies = require('../models/movies.js');
-    var model = null;
-    var title = 'Кино клуб';
-    var user = {};
-    if (res.locals.auth) var user = res.locals.user;
+    var model = null,
+        title = 'Кино клуб',
+        user = {};
 
-    if (res.locals.auth) Movies.GetByUser(res.locals.user.id, callback);
+    if (res.locals.auth) {
+        user = res.locals.user;
+        Movies.GetByUser(res.locals.user.id, callback);
+    }
     else Movies.GetAll(callback);
 
     function callback(err, movies){
