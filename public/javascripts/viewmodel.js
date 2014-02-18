@@ -289,7 +289,7 @@ function Viewmodel(model){
             return 'Войти в кино клуб';
         }
 
-        return 'Кино клуб;
+        return 'Кино клуб';
     }, this);
 }
 
