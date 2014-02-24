@@ -11,24 +11,24 @@ function Viewmodel(model){
 
     //ROUTING
     this.gotoMainPage = function(){
-        location.hash = '';
+        window.history.pushState({},'', '/');
     }
 
     this.gotoMovieDetailsPage = function(movie){
-        location.hash = 'movie/' + movie.id;
+        window.history.pushState({},'', '/movie/' + movie.id);
     }
 
     this.gotoLoginPage = function(){
-        location.hash = 'login'
+        window.history.pushState({},'', '/#login');
     }
 
     this.gotoAddMoviePage = function(){
-        location.hash = 'add'
+        window.history.pushState({},'', '/#add');
     }
 
     $(document).ready(function(){
         Sammy(function(){
-            this.get('#movie/:id', function(){
+            this.get('movie/:id', function(){
                 var id = this.params.id;
 
                 var currentMovie = null;
@@ -255,12 +255,12 @@ function Viewmodel(model){
 
     this.onShowOwnMovies = function(obj, event){
         closeDropdown('.control .dropdown-toggle');
-        location.hash='get-own';
+        window.history.pushState({},'', '/#get-own');
     }
 
     this.onShowAllMovies = function(obj, event){
         closeDropdown('.control .dropdown-toggle');
-        location.hash='get-all';
+        window.history.pushState({},'', '/#get-all');
     }
 
     this.onToggleWatchedMovies = function(){
