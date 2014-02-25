@@ -1,12 +1,19 @@
 extends layout
 
+block head
+    if selectedMovie
+        meta(property='og:title', content=selectedMovie.name)
+        meta(property='og:image', content=selectedMovie.image)
+        meta(property='og:url', content=path)
+        meta(property='og:type', content='video.movie')
+
 block content
     div(class='loading-holder', data-bind='loadingVisible: loading.isActive', style='display: none;')
         div(class='loading-indicator')
     div(class='container')
         div(class='header')
             span(data-bind='click: returnHomeClick') #{title}
-            img(src='images/logo.png', data-bind='click: returnHomeClick')
+            img(src='/images/logo.png', data-bind='click: returnHomeClick')
             div(class='user-info', data-bind='visible: page() != Global.Pages.Login')
                 div(data-bind='visible: isAuthorised')
                     span Привет,
@@ -54,7 +61,7 @@ block content
                     data-bind='style: {background: "url("+image+")"}, css: {watched: watched}, click: $parent.onMovieClick, visible:!$parent.isAuthorised() || $parent.showWatchedMovies() || !watched')
                     p(class='name', data-bind='text: name')
                     p(class='owner')
-                        img(src='images/user.png')
+                        img(src='/images/user.png')
                         span(data-bind='text: owner')
                     div(class='watched-icon glyphicon glyphicon-eye-open', data-bind='visible: watched')
 
@@ -72,7 +79,7 @@ block content
                 div(data-bind='text: addMovie.errorCaption')
                 div(class='button-close', data-bind='click: addMovie.closeError') x
             div(class='waiting row', data-bind='visible: addMovie.isWaiting')
-                img(src='images/waiting.gif')
+                img(src='/images/waiting.gif')
                 span Пожалуйста, подождите пока ваш фильм добавляется!
             div(class='info row')
                 span Для добавления фильма необходимо ввести url (ссылку на него) в поле выше. На данные момент поддерживаются ссылки
@@ -88,26 +95,26 @@ block content
                 img(class='details-image row', data-bind='attr:{src: movieDetails().image}')
                 div(class='btn-group', data-bind='visible: isAuthorised')
                     button(type='button', class='btn btn-default btn-first dropdown-toggle', data-bind='click: onExuaWatch')
-                        img(class='exua', src='images/ex.png')
+                        img(class='exua', src='/images/ex.png')
                         span Cмотреть на EX.UA
                     button(type='button', class='btn btn-default dropdown-toggle', data-toggle='dropdown')
                         span(class='caret')
                     ul(class='dropdown-menu', role='menu')
                         li
                             a(href='#', data-bind='click: onVkWatch')
-                                img(class='icon', src='images/vk.png')
+                                img(class='icon', src='/images/vk.png')
                                 span Смотреть ВКонтакте
                         li
                             a(href='#', data-bind='click: onMegogoWatch')
-                                img(class='icon', src='images/megogo.jpg')
+                                img(class='icon', src='/images/megogo.jpg')
                                 span Смотреть на Megogo.net
                         li
                             a(href='#', data-bind='click: onKinopoiskSearch')
-                                img(class='icon', src='images/kinopoisk.png')
+                                img(class='icon', src='/images/kinopoisk.png')
                                 span Искать на Кинопоиске
                         li
                             a(href='#', data-bind='click: onRutrackerSearch')
-                                img(class='icon', src='images/rutracker.png')
+                                img(class='icon', src='/images/rutracker.png')
                                 span Искать на RuTracker
                         li(class='divider')
                         li(data-bind='visible: false && user && movieDetails && user().id == movieDetails().ownerId')
@@ -137,13 +144,13 @@ block content
                         span Рейтинг:
                         cdiv(data-bind='foreach: movieDetails().ratings')
                             div(class='rating')
-                                img(class='rating-provider', data-bind='attr:{src: "images/p_" + provider + ".png"}')
+                                img(class='rating-provider', data-bind='attr:{src: "/images/p_" + provider + ".png"}')
                                 span(class='rating-value', data-bind='text: rating')
 
                 div(class='details-info low')
                     div(class='desc')
                         span Этот фильм добавил пользователь:
-                        img(src='images/user.png')
+                        img(src='/images/user.png')
                         b
                             span(data-bind='text: movieDetails().owner')
 
@@ -161,7 +168,7 @@ block content
         div(class='login page row', data-bind='visible: page() == Global.Pages.Login')
             div(class='col-md-6 col-md-offset-3 title')
                 div(class='caption')
-                    img(src='images/logo.png')
+                    img(src='/images/logo.png')
                     span Войти в
                     span(class='sitename') Киноклуб
                 div

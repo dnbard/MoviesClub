@@ -1,17 +1,18 @@
 doctype html
 html(id='htmlTop')
-  head
-    title(data-bind='text: title')= title
-    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    link(href='http://fonts.googleapis.com/css?family=Marck+Script&subset=latin,cyrillic', rel='stylesheet', type='text/css')
-    script(src='/javascripts/jquery-2.0.3.min.js')
-    script(src='/javascripts/bootstrap.min.js')
-    script(src='/javascripts/knockout-3.0.0.js')
-    script(src='/javascripts/sammy.js')
-    script(src='/javascripts/global.js')
-    script(src='/javascripts/utils.js')
+    head
+        title(data-bind='text: title')= title
+        block head
+        link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(href='http://fonts.googleapis.com/css?family=Marck+Script&subset=latin,cyrillic', rel='stylesheet', type='text/css')
+        script(src='/javascripts/jquery-2.0.3.min.js')
+        script(src='/javascripts/bootstrap.min.js')
+        script(src='/javascripts/knockout-3.0.0.js')
+        script(src='/javascripts/sammy.js')
+        script(src='/javascripts/global.js')
+        script(src='/javascripts/utils.js')
+        script(src='/javascripts/loadingControl.js')
 
-    script(src='/javascripts/loadingControl.js')
   body
     block content

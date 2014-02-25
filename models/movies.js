@@ -34,22 +34,26 @@ function FormatMoviesList(movies, callback){
             var movie = movies[i];
 
             var owner = GetOwnerName(users, movie.owner);
-            array.push({
-                name: movie.name,
-                date: movie.date,
-                desc: movie.desc,
-                image: movie.image,
-                owner: owner,
-                ownerId: movie.owner,
-                id: movie._id,
-                ratings: movie.ratings,
-                genres: movie.genres,
-                watched: movie.watched
-            });
+            array.push(formatSingleMovie(movie, owner));
         }
 
         callback(array);
     });
+}
+
+function formatSingleMovie(movie, owner){
+    return {
+        name: movie.name,
+        date: movie.date,
+        desc: movie.desc,
+        image: movie.image,
+        owner: owner?owner:null,
+        ownerId: movie.owner,
+        id: movie._id,
+        ratings: movie.ratings,
+        genres: movie.genres,
+        watched: movie.watched
+    };
 }
 
 var getAll = function(callback){
@@ -110,10 +114,20 @@ var toggleWatch = function(movieId, userId, result){
     });
 }
 
+var getById = function(movieId, result){
+    Movies.findOne({ _id: movieId}, function(err, movie){
+        if (err) { result(err); return; }
+        if (!movie) { result(true); return;}
+
+        result(false, formatSingleMovie(movie));
+    });
+}
+
 exports.Movies = Movies;
 exports.GetAll = getAll;
 exports.GetAllInternal = getAllInternal;
 exports.GetByUser = getByUser;
+exports.GetById = getById;
 
 exports.Add = addMovie;
 exports.Delete = deleteMovie;
