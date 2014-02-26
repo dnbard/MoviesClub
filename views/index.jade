@@ -6,6 +6,7 @@ block head
         meta(property='og:image', content=selectedMovie.image)
         meta(property='og:url', content=path)
         meta(property='og:type', content='video.movie')
+        meta(property='og:description', content=selectedMovie.desc)
 
 block content
     div(class='loading-holder', data-bind='loadingVisible: loading.isActive', style='display: none;')
