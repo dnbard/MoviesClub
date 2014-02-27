@@ -3,11 +3,11 @@ var mongoose = require('mongoose'),
     utils = require('../utils.js');
 
 var moviesSchema = mongoose.Schema({
-    name: String,
+    name: {type:String, index: true},
     image: String,
     desc: String,
-    date: String,
-    owner: String,
+    date: {type:String, index: true},
+    owner: {type:String, index: true},
     ratings:[{
         provider: String,
         rating: String
