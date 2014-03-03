@@ -55,6 +55,9 @@ block content
                     a(href='#') Главная
                 li(data-bind='css:{active: page() == Global.Pages.AddMovie}, visible: isAuthorised')
                     a(href='#add', data-bind='click: addNewMovieClick') Добавить кино
+                li(class='header-movies-summary')
+                    span(class='glyphicon glyphicon-film',data-bind='text: moviesCount, tooltip: "Все фильмы", click: onShowMoviewWithAllStatuses')
+                    span(class='glyphicon glyphicon-eye-close', data-bind='text: moviesUnseen, tooltip: "Непросмотренные фильмы", click: onNotShowWatchedMovies')
 
         div(class='first page row', data-bind='visible: page() == Global.Pages.Main')
             cdiv(class='main', data-bind='foreach: movies')

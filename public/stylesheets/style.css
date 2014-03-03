@@ -115,12 +115,41 @@ div.header .separator{
     opacity: 0.75;
 }
 
+.header-movies-summary{
+    margin-top: 3px;
+    color: white;
+    background: rgba(0, 132, 255, 0.7);
+    padding: 6px;
+    border-radius: 5px;
+    box-shadow: 0 0 2px rgba(0, 132, 255, 0.7);
+}
+
+.header-movies-summary > .glyphicon{
+    margin:0 2px 4px 10px;
+    cursor: pointer;
+    transition: 0.25s all;
+}
+
+.header-movies-summary > .glyphicon:hover{
+    color: gold;
+}
+
+.header-movies-summary > .glyphicon:before{
+    margin-right: 2px;
+    vertical-align: text-bottom;
+}
+
+.header-movies-summary > .glyphicon.glyphicon-film{
+    margin-left:0px;
+}
+
 div.control{
     width: 100%;
     height: 45px;
     margin-top: -45px;
     position: relative;
     z-index: 100;
+    background: rgba(255,255,255,0.75);
 }
 
 .control > .nav{

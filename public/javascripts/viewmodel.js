@@ -82,6 +82,29 @@ function Viewmodel(model){
 
     this.movieDetails = ko.observable({});
 
+    this.moviesCount = ko.computed(function(){
+        try{
+            return this.movies().length;
+        } catch(e){
+            return 0;
+        }
+    }, this);
+
+    this.moviesUnseen = ko.computed(function(){
+        try{
+            var movies = this.movies(),
+                count = 0;
+            for(var i in movies){
+                var movie = movies[i];
+                if (!movie.watched) count ++;
+            }
+
+            return count;
+        } catch(e) {
+            return 0;
+        }
+    }, this);
+
     this.isAuthorised = ko.computed(function(){
         var user = this.user();
         return !Utils.isEmpty(user);
@@ -267,6 +290,14 @@ function Viewmodel(model){
         this.showWatchedMovies(!this.showWatchedMovies());
     }
 
+    this.onShowMoviewWithAllStatuses = function(){
+        this.showWatchedMovies(true);
+    }
+
+    this.onNotShowWatchedMovies = function(){
+        this.showWatchedMovies(false);
+    }
+
     this.passwordOnChange = function(model,event){
         var keyCode = event.keyCode;
 
@@ -291,6 +322,10 @@ function Viewmodel(model){
 
         return 'Кино клуб';
     }, this);
+
+    this.onScrollHeader = function(event){
+        debugger;
+    }
 }
 
 function AddMovieController(model, serviceUrl){
