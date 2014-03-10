@@ -6,7 +6,8 @@ var usersSchema = mongoose.Schema({
     login: {type:String, index: true},
     password: {type: String, index: true},
     token: {type: String, index: true},
-    name: String
+    name: String,
+    gender: String
 });
 
 var Users = mongoose.model('Users', usersSchema);
@@ -14,7 +15,7 @@ var Users = mongoose.model('Users', usersSchema);
 var findByToken = function(token, success, failure){
 	if (token) {
 		Users.find({ token: token },
-            {name:1, token:1, _id:0, id:1},
+            {name:1, token:1, gender: 1, _id:0, id:1},
             function(err, user){
             	if (err) {
             		failure();

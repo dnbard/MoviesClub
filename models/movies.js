@@ -110,7 +110,7 @@ var toggleWatch = function(movieId, userId, result){
 
         movie.watched = !movie.watched;
         movie.save();
-        result(false);
+        result(false, movie.watched);
     });
 }
 

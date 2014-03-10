@@ -1,6 +1,7 @@
 var Users = require('../models/users.js'),
     utils = require('../utils.js'),
-    Movies = require('../models/movies.js');
+    Movies = require('../models/movies.js'),
+    Articles = require('../models/articles.js');
 
 var sendNotAuth = function(req, res){
     res.send({
@@ -108,13 +109,24 @@ exports.watch = function(req, res){
     if (res.locals.auth){
         var movieId = req.body.movie,
             userId = res.locals.user.id;
-        Movies.ToggleWatch(movieId, userId, function(err){
+        Movies.ToggleWatch(movieId, userId, function(err, state){
             if (err) {
                 res.status(400).send();
             } else {
-                res.send({
-                    result: true
-                });
+                if (state) {
+                    Movies.GetById(movieId, function(err, movie){
+                        if (err) {
+                            res.status(500).send(err);
+                        } else {
+                            Articles.addMovieWatchedMessage(res.locals.user, movie);
+                            res.send({ result: true });
+                        }
+                    });
+                } else {
+                    Articles.removeMovieWatchedMessage(res.locals.user, movieId, function(){
+                        res.send({ result: true });
+                    });
+                }
             }
         });
 

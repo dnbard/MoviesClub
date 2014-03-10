@@ -1,6 +1,7 @@
 var routes = require('./routes'),
 	api = require('./routes/api.js'),
-	user = require('./routes/user');
+	user = require('./routes/user'),
+    test = require('./routes/test.js');
 
 var init = function(app){
     app.get('/', routes.index);
@@ -13,6 +14,8 @@ var init = function(app){
     app.get('/api/getall', api.getall);
     app.post('/api/delete', api.delete);
     app.post('/api/watch', api.watch);
+
+    app.get('/test/article', test.index);
 };
 
 exports.init = init;

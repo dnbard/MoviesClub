@@ -40,7 +40,7 @@ function trim(str)
 
 function stringNormalize (str){
     var escapeStrings = [
-        '&nbsp;', '<span>', '</span>', '(сериал)'
+        '&nbsp;', '<span>', '</span>', '(сериал)', '(ТВ)'
     ];
 
     for(var i = 0; i < escapeStrings.length; i ++)
