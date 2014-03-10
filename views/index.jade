@@ -53,6 +53,8 @@ block content
                                 span(class='text') Показывать просмотренные фильмы
                 li(data-bind='css:{active: page() == Global.Pages.Main}, visible: !isAuthorised()')
                     a(href='#') Главная
+                li(data-bind='css:{active: page() == Global.Pages.Articles}')
+                    a(href='#news') Новости
                 li(data-bind='css:{active: page() == Global.Pages.AddMovie}, visible: isAuthorised')
                     a(href='#add', data-bind='click: addNewMovieClick') Добавить кино
                 li(class='header-movies-summary')
@@ -188,6 +190,19 @@ block content
                         button(class='btn btn-primary', data-bind='click: onLoginClick') Войти
                         button(class='btn btn-default') Регистрация
                         button(class='btn btn-default', data-bind='click: onLoginCancel') Отмена
+
+        div(class='articles page row', data-bind='visible: page() == Global.Pages.Articles')
+            div(class='col-md-12', data-bind='foreach: articles')
+                div(class='holder row')
+                    span(class='timestamp', data-bind='timeAgo: $data.timestamp')
+                    span(data-bind='foreach: content')
+                        a(data-bind='if: $data.class=="movie", attr:{href: "/movie/"+objectId}')
+                            span(data-bind='text: text')
+                        a(data-bind='if: ($data.class=="userMale" || $data.class=="userFemale")')
+                            span(class='glyphicon glyphicon-user', data-bind='text: text')
+                        span(data-bind='if: $data.class=="plainText"')
+                            span(data-bind='text: text')
+
 
 
     script(src='/javascripts/viewmodel.js')

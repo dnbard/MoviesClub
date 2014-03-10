@@ -10,6 +10,8 @@ function Viewmodel(model){
     this.showWatchedMovies = ko.observable(false);
     this.showOnlyWatchedMovies = ko.observable(false);
 
+    this.articles = ko.observableArray([]);
+
     //ROUTING
     this.gotoMainPage = function(){
         window.history.pushState({},'', '/');
@@ -43,6 +45,10 @@ function Viewmodel(model){
                 } else {
                     this.redirect('');
                 }
+            });
+
+            this.get('#news', function(){
+                self.getArticles();
             });
 
             this.get('#login', function(){
@@ -144,6 +150,15 @@ function Viewmodel(model){
 
         return result;
     }, this);
+
+    this.getArticles = function(){
+        self.loading.show();
+        Utils.get(serviceUrl + '/api/articles', {}, function(data){
+            self.articles(data.articles);
+            self.loading.hide();
+            self.page(Global.Pages.Articles);
+        });
+    }
 
     this.GetMoviesInfo = $.proxy(function (data){
         var loading = this.loading;
@@ -341,8 +356,15 @@ function Viewmodel(model){
         return 'Кино клуб';
     }, this);
 
-    this.onScrollHeader = function(event){
-        debugger;
+    this.timestamp = function(dateObject){
+        try{
+            var date = new Date(dateObject);
+            return Utils.format('{0}.{1}.{2} {3}:{4}', date.getDate(), date.getMonth(), date.getFullYear(),
+                date.getHours(), date.getMinutes());
+        }
+        catch(e) {
+            return '';
+        }
     }
 }
 

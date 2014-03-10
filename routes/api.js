@@ -132,3 +132,13 @@ exports.watch = function(req, res){
 
     } else sendNotAuth(req, res);
 }
+
+exports.getArticles = function(req, res){
+    Articles.getAll(function(err, articles){
+        if (err){
+            res.status(500).send(err);
+        } else {
+            res.send({result: true, articles: articles});
+        }
+    })
+}

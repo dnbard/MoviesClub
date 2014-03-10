@@ -15,6 +15,8 @@ var init = function(app){
     app.post('/api/delete', api.delete);
     app.post('/api/watch', api.watch);
 
+    app.get('/api/articles', api.getArticles);
+
     app.get('/test/article', test.index);
 };
 

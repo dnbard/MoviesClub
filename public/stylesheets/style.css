@@ -788,3 +788,12 @@ img.exua{
     right: 0;
     margin: auto;
 }
+
+.articles .holder{
+    margin: 25px 0;
+}
+
+.articles .holder > a > span, .articles .holder > span > span,
+.articles .holder > .timestamp{
+    padding-right: 5px;
+}

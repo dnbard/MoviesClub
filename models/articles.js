@@ -76,3 +76,7 @@ exports.removeMovieWatchedMessage = function(user, movieId, callback){
         {},
         callback);
 }
+
+exports.getAll = function(callback){
+    Articles.find({}, callback);
+}
