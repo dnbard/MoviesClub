@@ -8,6 +8,7 @@ function Viewmodel(model){
     this.loading = new LoadingControl(this);
 
     this.showWatchedMovies = ko.observable(false);
+    this.showOnlyWatchedMovies = ko.observable(false);
 
     //ROUTING
     this.gotoMainPage = function(){
@@ -100,6 +101,16 @@ function Viewmodel(model){
             }
 
             return count;
+        } catch(e) {
+            return 0;
+        }
+    }, this);
+
+    this.moviesSeen = ko.computed(function(){
+        try{
+            var movies = this.movies();
+            return movies.length - this.moviesUnseen();
+
         } catch(e) {
             return 0;
         }
@@ -288,14 +299,21 @@ function Viewmodel(model){
 
     this.onToggleWatchedMovies = function(){
         this.showWatchedMovies(!this.showWatchedMovies());
+        this.showOnlyWatchedMovies(false);
     }
 
     this.onShowMoviewWithAllStatuses = function(){
         this.showWatchedMovies(true);
+        this.showOnlyWatchedMovies(false);
     }
 
     this.onNotShowWatchedMovies = function(){
         this.showWatchedMovies(false);
+        this.showOnlyWatchedMovies(false);
+    }
+
+    this.onShowOnlyWatchedMovies = function(){
+        this.showOnlyWatchedMovies(true);
     }
 
     this.passwordOnChange = function(model,event){

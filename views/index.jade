@@ -58,11 +58,13 @@ block content
                 li(class='header-movies-summary')
                     span(class='glyphicon glyphicon-film',data-bind='text: moviesCount, tooltip: "Все фильмы", click: onShowMoviewWithAllStatuses')
                     span(class='glyphicon glyphicon-eye-close', data-bind='text: moviesUnseen, tooltip: "Непросмотренные фильмы", click: onNotShowWatchedMovies')
+                    span(class='glyphicon glyphicon-eye-open', data-bind='text: moviesSeen, tooltip: "Просмотренные фильмы", click: onShowOnlyWatchedMovies')
 
         div(class='first page row', data-bind='visible: page() == Global.Pages.Main')
             cdiv(class='main', data-bind='foreach: movies')
                 div(class='movie',
-                    data-bind='style: {background: "url("+image+")"}, css: {watched: watched}, click: $parent.onMovieClick, visible:!$parent.isAuthorised() || $parent.showWatchedMovies() || !watched')
+                    data-bind='style: {background: "url("+image+")"}, css: {watched: watched}, click: $parent.onMovieClick,'+
+                        'visible:!$parent.isAuthorised() || ($parent.showOnlyWatchedMovies() && watched) || (($parent.showWatchedMovies() || (!watched && !$parent.showWatchedMovies())) && !$parent.showOnlyWatchedMovies())')
                     p(class='name', data-bind='text: name')
                     p(class='owner')
                         img(src='/images/user.png')
