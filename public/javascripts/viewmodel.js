@@ -222,6 +222,10 @@ function Viewmodel(model){
         this.addMovie.show();
     };
 
+    this.showArticlesClick = function(){
+        window.history.pushState({},'', '/#news');
+    };
+
     this.returnHomeClick = function(){
         this.gotoMainPage();
     };
@@ -365,6 +369,23 @@ function Viewmodel(model){
         catch(e) {
             return '';
         }
+    }
+
+    var articleGlyphs = {
+        'movieAdded': 'glyphicon-plus',
+        'movieWatched': 'glyphicon-eye-open'
+    },
+        defaultGlyph = 'glyphicon-info-sign';
+
+    this.articleGlyph = function(article){
+        var glyph = articleGlyphs[article.class];
+        return glyph ? glyph : defaultGlyph;
+    }
+
+    this.articleGlyphWidth = function(article){
+        var days = (new Date().getTime() - new Date(article.timestamp).getTime()) / 86400000;
+        var width = 5 + (days / 7 * 80);
+        return width + 'px';
     }
 }
 

@@ -789,11 +789,46 @@ img.exua{
     margin: auto;
 }
 
+.articles{
+    padding: 15px 0;
+}
+
 .articles .holder{
-    margin: 25px 0;
+    margin: 5px 0;
+}
+
+.articles .holder a{
+    font-weight: bold;
+    transition: 0.25s all;
 }
 
 .articles .holder > a > span, .articles .holder > span > span,
 .articles .holder > .timestamp{
     padding-right: 5px;
+}
+
+.articles .holder > .glyphicon{
+    margin-right: 5px;
+}
+
+.articles > .design > .row{
+    min-height: 11px;
+    margin-right: -20px;
+    padding-right: 0;
+    margin-top: 12px;
+    margin-bottom: 5px;
+    border-top: 1px solid gray;
+    position: relative;
+}
+
+.articles > .design .glyphicon{
+    position: absolute;
+    left: -2px;
+    top: -8px;
+    border: 1px dotted gray;
+    color: rgba(128, 128, 128, 0);
+    border-radius: 3px;
+    background: white;
+    min-width: 10px;
+    max-width: 85px;
 }

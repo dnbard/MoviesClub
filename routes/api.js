@@ -42,12 +42,13 @@ exports.add = function(req, res){
         if (url && utils.isValidUrl(url)){
             var parser = require('../parser/main.js');
             parser.parse(url, function(movie){                
-                Movies.Add(movie, res.locals.user, function (err) {
+                Movies.Add(movie, res.locals.user, function (err, movieEnt) {
                     if (err) res.send({
                         result: false, 
                         msg: err
                     }); 
                     else {
+                        Articles.addMovieMessage(res.locals.user, movieEnt);
                         res.send({
                             result: true, 
                             msg: utils.format('Movie "{0}" added successfully')

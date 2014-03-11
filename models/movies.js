@@ -93,7 +93,10 @@ var addMovie = function(movie, user, callback){
     ent.ratings = movie.ratings;
     ent.genres = movie.genres;
     ent.watched = false;
-    ent.save(callback);
+    ent.save(function(err)
+    {
+        callback(err, ent);
+    });
 }
 
 var deleteMovie = function(id, userid, success, failure){
